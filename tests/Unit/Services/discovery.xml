@@ -1,0 +1,456 @@
+<wopi-discovery>
+    <net-zone name="external-http">
+
+        <!-- Writer documents -->
+        <app favIconUrl="http://127.0.0.1:9980/loleaflet/d12ab86/images/x-office-document.svg" name="writer">
+            <action default="true" ext="sxw" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="odt" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="fodt" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Text template documents -->
+            <action default="true" ext="stw" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="ott" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- MS Word -->
+            <action default="true" ext="doc" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="dot" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- OOXML wordprocessing -->
+            <action default="true" ext="docx" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="docm" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="dotx" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="dotm" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Others -->
+            <action default="true" ext="wpd" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="pdb" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="hwp" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="wps" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="wri" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="lrf" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="mw" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="rtf" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="txt" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="fb2" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="cwk" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="pages" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="abw" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="602" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <app name="writer-global">
+            <!-- Text master documents -->
+            <action default="true" ext="sxg" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="odm" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Writer master document templates -->
+            <action default="true" ext="otm" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <app name="writer-web">
+            <action default="true" ext="oth" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Calc documents -->
+        <app favIconUrl="http://127.0.0.1:9980/loleaflet/d12ab86/images/x-office-spreadsheet.svg" name="calc">
+            <action default="true" ext="sxc" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="ods" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="fods" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Spreadsheet template documents -->
+            <action default="true" ext="stc" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="ots" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- MS Excel -->
+            <action default="true" ext="xls" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="xla" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- OOXML spreadsheet -->
+            <action default="true" ext="xltx" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="xltm" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="xlsx" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="xlsb" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="xlsm" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Others -->
+            <action default="true" ext="dif" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="slk" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="csv" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="dbf" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="wk1" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="gnumeric" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="numbers" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Impress documents -->
+        <app favIconUrl="http://127.0.0.1:9980/loleaflet/d12ab86/images/x-office-presentation.svg" name="impress">
+            <action default="true" ext="sxi" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="odp" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="fodp" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Presentation template documents -->
+            <action default="true" ext="sti" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="otp" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- MS PowerPoint -->
+            <action default="true" ext="ppt" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="pot" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- OOXML presentation -->
+            <action default="true" ext="pptx" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="pptm" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="potx" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="potm" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="ppsx" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Others -->
+            <action default="true" ext="cgm" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="key" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Draw documents -->
+        <app name="draw">
+            <action default="true" ext="sxd" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="odg" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="fodg" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Drawing template documents -->
+            <action default="true" ext="std" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="otg" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <!-- Others -->
+            <action ext="svg" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="dxf" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="emf" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="wmf" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="cdr" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="vsd" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="vsdx" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="vss" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="pub" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="p65" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="wpg" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action default="true" ext="fh" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="bmp" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="png" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="gif" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="tiff" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="jpg" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="jpeg" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+            <action ext="pdf" name="view_comment" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Math documents -->
+        <!-- In fact Math documents are not supported at all.
+             See: https://bugs.documentfoundation.org/show_bug.cgi?id=97006
+        <app name="math">
+            <action name="view" default="true" ext="sxm"/>
+            <action name="edit" default="true" ext="odf"/>
+        </app>
+        -->
+
+        <!-- Legacy MIME-type actions (compatibility) -->
+
+        <app name="image/svg+xml">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-powerpoint">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-excel">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Writer documents -->
+        <app name="application/vnd.sun.xml.writer">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.text">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.text-flat-xml">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Calc documents -->
+        <app name="application/vnd.sun.xml.calc">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.spreadsheet">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.spreadsheet-flat-xml">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Impress documents -->
+        <app name="application/vnd.sun.xml.impress">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.presentation">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.presentation-flat-xml">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Draw documents -->
+        <app name="application/vnd.sun.xml.draw">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.graphics">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.graphics-flat-xml">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Chart documents -->
+        <app name="application/vnd.oasis.opendocument.chart">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Text master documents -->
+        <app name="application/vnd.sun.xml.writer.global">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.text-master">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Math documents -->
+        <!-- In fact Math documents are not supported at all.
+             See: https://bugs.documentfoundation.org/show_bug.cgi?id=97006
+        <app name="application/vnd.sun.xml.math">
+            <action name="view" default="true" ext=""/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.formula">
+            <action name="edit" default="true" ext=""/>
+        </app>
+        -->
+        <!-- Text template documents -->
+        <app name="application/vnd.sun.xml.writer.template">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.text-template">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Writer master document templates -->
+        <app name="application/vnd.oasis.opendocument.text-master-template">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Spreadsheet template documents -->
+        <app name="application/vnd.sun.xml.calc.template">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.spreadsheet-template">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Presentation template documents -->
+        <app name="application/vnd.sun.xml.impress.template">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.presentation-template">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Drawing template documents -->
+        <app name="application/vnd.sun.xml.draw.template">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.graphics-template">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- MS Word -->
+        <app name="application/msword">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/msword">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- MS Excel -->
+        <app name="application/vnd.ms-excel">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- MS PowerPoint -->
+        <app name="application/vnd.ms-powerpoint">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- OOXML wordprocessing -->
+        <app name="application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-word.document.macroEnabled.12">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.openxmlformats-officedocument.wordprocessingml.template">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-word.template.macroEnabled.12">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- OOXML spreadsheet -->
+        <app name="application/vnd.openxmlformats-officedocument.spreadsheetml.template">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-excel.template.macroEnabled.12">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-excel.sheet.binary.macroEnabled.12">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-excel.sheet.macroEnabled.12">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- OOXML presentation -->
+        <app name="application/vnd.openxmlformats-officedocument.presentationml.presentation">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-powerpoint.presentation.macroEnabled.12">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.openxmlformats-officedocument.presentationml.template">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-powerpoint.template.macroEnabled.12">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- Others -->
+        <app name="application/vnd.wordperfect">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-aportisdoc">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-hwp">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-works">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-mswrite">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-dif-document">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="text/spreadsheet">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="text/csv">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-dbase">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.lotus-1-2-3">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/cgm">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/vnd.dxf">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/x-emf">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/x-wmf">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/coreldraw">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.visio2013">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.visio">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.ms-visio.drawing">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-mspublisher">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-sony-bbeb">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-gnumeric">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/macwriteii">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-iwork-numbers-sffnumbers">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.oasis.opendocument.text-web">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-pagemaker">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="text/rtf">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="text/plain">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-fictionbook+xml">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/clarisworks">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/x-wpg">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-iwork-pages-sffpages">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.openxmlformats-officedocument.presentationml.slideshow">
+            <action default="true" ext="" name="edit" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-iwork-keynote-sffkey">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-abiword">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/x-freehand">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/vnd.sun.xml.chart">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/x-t602">
+            <action default="true" ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/bmp">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/png">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/gif">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/tiff">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/jpg">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="image/jpeg">
+            <action ext="" name="view" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+        <app name="application/pdf">
+            <action ext="" name="view_comment" urlsrc="http://127.0.0.1:9980/loleaflet/d12ab86/loleaflet.html?"/>
+        </app>
+
+        <!-- End of legacy MIME-type actions -->
+
+        <app name="Capabilities">
+            <action ext="" name="getinfo" urlsrc="http://127.0.0.1:9980/hosting/capabilities"/>
+        </app>
+    </net-zone>
+<proof-key exponent="AQAB" modulus="uO9XJJS0cM28i6oe0+1mMTAt/oqQE66uW44sR28rmONsijm61K673uMPl/oSLg17aVy89aKN+dWjUf6iVHdnPC89X7JkYb10rXjzAHNw/4EsF+uLnnmRw0t9yDLIlHLXAo2o9u/PhzXNnj2Cr7fHsGJ76jRSKy2SdoGRNlGDs5t6uy3f86+yUJ4XIWmh8tI2Ox5D9zIvhoW8d2Nb5nhcpJOjiimZiV2PVzZaj+f9Ftn0QroYf9E74f2r+89xxyk7vZzvsJCMKW2xVNeDD1TXTkiuiMYe5KppDVs+Gb0yc/TMrqFJvsjo/9VcmMpIyaKr+o+B0J/rT6ZG2heZ1Eyh5w==" oldexponent="AQAB" oldmodulus="uO9XJJS0cM28i6oe0+1mMTAt/oqQE66uW44sR28rmONsijm61K673uMPl/oSLg17aVy89aKN+dWjUf6iVHdnPC89X7JkYb10rXjzAHNw/4EsF+uLnnmRw0t9yDLIlHLXAo2o9u/PhzXNnj2Cr7fHsGJ76jRSKy2SdoGRNlGDs5t6uy3f86+yUJ4XIWmh8tI2Ox5D9zIvhoW8d2Nb5nhcpJOjiimZiV2PVzZaj+f9Ftn0QroYf9E74f2r+89xxyk7vZzvsJCMKW2xVNeDD1TXTkiuiMYe5KppDVs+Gb0yc/TMrqFJvsjo/9VcmMpIyaKr+o+B0J/rT6ZG2heZ1Eyh5w==" oldvalue="oldvalue_BgIAAACkAABSU0ExAAgAAAEAAQDnoUzUmRfaRqZP65/QgY/6q6LJSMqYXNX/6Mi+SaGuzPRzMr0ZPlsNaarkHsaIrkhO11QPg9dUsW0pjJCw75y9OynHcc/7q/3hO9F/GLpC9NkW/eePWjZXj12JmSmKo5OkXHjmW2N3vIWGLzL3Qx47NtLyoWkhF55Qsq/z3y27epuzg1E2kYF2ki0rUjTqe2Kwx7evgj2ezTWHz+/2qI0C13KUyDLIfUvDkXmei+sXLIH/cHMA83itdL1hZLJfPS88Z3dUov5Ro9X5jaL1vFxpew0uEvqXD+Peu67UujmKbOOYK29HLI5brq4TkIr+LTAxZu3THqqLvM1wtJQkV++4" value="value_BgIAAACkAABSU0ExAAgAAAEAAQDnoUzUmRfaRqZP65/QgY/6q6LJSMqYXNX/6Mi+SaGuzPRzMr0ZPlsNaarkHsaIrkhO11QPg9dUsW0pjJCw75y9OynHcc/7q/3hO9F/GLpC9NkW/eePWjZXj12JmSmKo5OkXHjmW2N3vIWGLzL3Qx47NtLyoWkhF55Qsq/z3y27epuzg1E2kYF2ki0rUjTqe2Kwx7evgj2ezTWHz+/2qI0C13KUyDLIfUvDkXmei+sXLIH/cHMA83itdL1hZLJfPS88Z3dUov5Ro9X5jaL1vFxpew0uEvqXD+Peu67UujmKbOOYK29HLI5brq4TkIr+LTAxZu3THqqLvM1wtJQkV++4"/></wopi-discovery>
