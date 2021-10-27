@@ -3,7 +3,6 @@
 namespace Nagi\LaravelWopi;
 
 use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
-use Nagi\LaravelWopi\Contracts\DocumentManagerInterface;
 use Nagi\LaravelWopi\Contracts\WopiInterface;
 use Nagi\LaravelWopi\Services\Discovery;
 use Nagi\LaravelWopi\Services\ProofValidator;
@@ -33,7 +32,7 @@ class LaravelWopiServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-wopi')
-            ->hasRoute('wopi.php')
+            ->hasRoute('wopi')
             ->hasConfigFile();
     }
 }

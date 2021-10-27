@@ -37,7 +37,7 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
 
         if ($response->status() !== 200) {
             // Todo create not found exception
-            throw new NotFoundResourceException("Could not reach to the configuration xml file at {$url}");
+            throw new NotFoundResourceException("Could not reach to the configuration xml file from {$url}");
         }
 
         return $response->body();

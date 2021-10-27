@@ -8,5 +8,5 @@ Route::group([
     'middleware' => [ValidateProof::class],
     'prefix'     => 'wopi',
 ], function () {
-    Route::get('files/{file_id}', CheckFileInfoController::class);
+    Route::get('files/{file_id}', CheckFileInfoController::class)->name('checkFileInfo');
 });

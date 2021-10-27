@@ -15,7 +15,7 @@ class LaravelWopi implements WopiInterface
 
         $document = $documentManager::find($fileId);
 
-        $user = $request->user();
+        $user = optional($request->user());
 
         // Todo implement some sort of caching mechanism
 

@@ -18,7 +18,7 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
 
     public function getDiscoveryXMLConfigFile(): ?string
     {
-        return file_get_contents(__DIR__.'/Unit/Services/discovery.xml');
+        return file_get_contents(__DIR__.'/../Unit/Services/discovery.xml');
     }
 
     public function getAccessTokenTTL(): int

@@ -1,12 +1,42 @@
-# Wopi implementation in php Laravel
+Todo Logo here
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/nagi/laravel-wopi.svg?style=flat-square)](https://packagist.org/packages/nagi/laravel-wopi)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/nagi/laravel-wopi/run-tests?label=tests)](https://github.com/nagi/laravel-wopi/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/nagi/laravel-wopi/Check%20&%20fix%20styling?label=code%20style)](https://github.com/nagi/laravel-wopi/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/nagi/laravel-wopi.svg?style=flat-square)](https://packagist.org/packages/nagi/laravel-wopi)
+# Laravel Wopi Host
 
 ---
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+Implementation of the WOPI protocol to facilitate intergration with LibreOffice and office online using Laravel.
+
+## 📃 Description
+
+Web Application Open Platform Interface (**WOPI**) protocol let you integrate Office in your web application.
+
+WOPI protocol enables Office for the web to access and change files that are stored in your service.
+**Basically it allows you to create Google Docs at the confert of your localhost/application.**
+
+Supports:
+
+* [Collabora Office](#) (Recommended)
+* [Office 365](#)
+
+## ⚠ Important
+
+This project is in alpha and under heavy development, please dont use it in production yet ❗
+
+Consider reading [Contribution Guide](#) to help bring this project to life.
+
+
+Todo Demo
+
+## 🚀 Getting Started
+
+Because every application have diffrent requirements and implementation this project provides the tools and documentation to ease integration.
+
+1. Start by exploring
+
+
+
+## Installation
+
+```composer require champs-libres/wopi-bundle```
 
 1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this laravel-wopi
 2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files
