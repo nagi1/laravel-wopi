@@ -11,7 +11,7 @@ class ValidateProof
 {
     public function handle(Request $request, Closure $next)
     {
-        if (ProofValidator::isValid(ProofValidatorInput::fromRequest($request))) {
+        if (! ProofValidator::isValid(ProofValidatorInput::fromRequest($request))) {
             // todo check response in docs
             return abort(500);
         }
