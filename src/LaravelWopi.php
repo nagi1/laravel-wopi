@@ -318,7 +318,11 @@ class LaravelWopi implements WopiInterface
         }
 
         /** @var AbstractDocumentManager */
-        $newDocument = $documentManager::create($target, (string) $request->getContent(), $request->header(WopiInterface::HEADER_SIZE));
+        $newDocument = $documentManager::create([
+            'name' => $target,
+            'content' => (string) $request->getContent(),
+            'size' => $request->header(WopiInterface::HEADER_SIZE),
+        ]);
 
         $url = route('wopi.checkFileInfo', ['file_id' => $newDocument->id()]);
         $url = sprintf('%s?access_token=%s', $url, $accessToken);

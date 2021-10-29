@@ -96,7 +96,7 @@ abstract class AbstractDocumentManager
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    abstract public static function create(string $name, string $content, int $size): static;
+    abstract public static function create(array $properties): static;
 
     /**
      * Unique id that identifies single file could be numbers
