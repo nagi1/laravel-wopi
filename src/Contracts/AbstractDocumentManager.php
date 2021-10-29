@@ -3,6 +3,8 @@
 namespace Nagi\LaravelWopi\Contracts;
 
 use Closure;
+use Exception;
+use Nagi\LaravelWopi\Facades\Discovery;
 
 abstract class AbstractDocumentManager
 {
@@ -13,7 +15,7 @@ abstract class AbstractDocumentManager
      */
     protected static array $propertyMethodMapping = [
         // Required proprties
-        'FileBaseName' => 'basename',
+        'BaseFileName' => 'basename',
         'OwnerId' => 'owner',
         'Size' => 'size',
         'Version' => 'version',
@@ -21,7 +23,7 @@ abstract class AbstractDocumentManager
 
         // Permission properties
         'ReadOnly' => 'isReadOnly',
-        'UserCanNotWriteRelative' => 'canUserWriteRelative',
+        'UserCanNotWriteRelative' => 'userCanNotWriteRelative',
         'UserCanRename' => 'canUserRename',
         'UserCanWrite' => 'canUserWrite',
 
@@ -32,6 +34,7 @@ abstract class AbstractDocumentManager
 
         // Sharable
         'FileSharingUrl' => 'sharingUrl',
+        'SupportedShareUrlTypes' => 'supportedShareUrlTypes',
 
         // Override getting file content url
         'FileUrl' => 'getFileContentUrl',
@@ -55,6 +58,14 @@ abstract class AbstractDocumentManager
 
         // Disable copy
         'DisableCopy' => 'disableCopy',
+
+        // Override supported features
+        'SupportsDeleteFile' => 'supportDelete',
+        'SupportsLocks' => 'supportLocks',
+        'SupportsUpdate' => 'supportUpdate',
+        'SupportsRename' => 'supportRename',
+        // 'SupportsUserInfo' => 'supportUserInfo',
+
     ];
 
     /**
@@ -72,6 +83,59 @@ abstract class AbstractDocumentManager
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     abstract public static function find(string $fileId): static;
+
+    /**
+     * Preform look up for the file/document by filename.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    abstract public static function findByName(string $filename): static;
+
+    /**
+     * Create new document instace on the host.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    abstract public static function create(string $name, string $content, int $size): static;
+
+    /**
+     * Unique id that identifies single file could be numbers
+     * or string, but also should be url safe. It should
+     * match fileId parameter passed to static::find.
+     */
+    abstract public function id(): string;
+
+    public function supportLocks(): bool
+    {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        return $config->supportLocks();
+    }
+
+    public function supportUpdate(): bool
+    {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        return $config->supportUpdate();
+    }
+
+    public function supportRename(): bool
+    {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        return $config->supportRename();
+    }
+
+    public function supportDelete(): bool
+    {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        return $config->supportDelete();
+    }
 
     /**
      * Name of the file, including extension, without a path. Used
@@ -104,6 +168,31 @@ abstract class AbstractDocumentManager
      * Binary contents of the file. Not the url!
      */
     abstract public function content(): string;
+
+    /**
+     * Determin if the document is locked or not.
+     */
+    abstract public function isLocked(): bool;
+
+    /**
+     * Get current lock on the document.
+     */
+    abstract public function getLock(): string;
+
+    /**
+     * Change document contents.
+     */
+    abstract public function put(string $content, array $editorsIds = []);
+
+    /**
+     * Delete the lock on the document.
+     */
+    abstract public function deleteLock(): void;
+
+    /**
+     * Lock the document prevent it from being altered or deleted.
+     */
+    abstract public function lock(string $lockId): void;
 
     /**
      * Manually set user id.
@@ -141,6 +230,18 @@ abstract class AbstractDocumentManager
     }
 
     /**
+     * Indicates that the user has permission to alter the
+     * file. Setting this to true tells the WOPI client
+     * that it can call PutFile on behalf of the user.
+     *
+     * @default-value false
+     */
+    public function canUserWrite(): bool
+    {
+        return true;
+    }
+
+    /**
      * Manually set user id using closure.
      */
     public function getUserUsing(Closure $calback): static
@@ -148,6 +249,26 @@ abstract class AbstractDocumentManager
         $this->userId = $calback;
 
         return $this;
+    }
+
+    public function getUrlForAction(string $action): string
+    {
+        $extension = method_exists($this, 'extension')
+            ? $this->extension()
+            : optional(pathinfo($this->basename()))['extension'];
+
+        $url = route('wopi.checkFileInfo', [
+            'file_id' => $this->id(),
+        ]);
+
+        $actionUrl = optional(Discovery::discoverAction($extension, $action));
+
+        if (is_null($actionUrl['urlsrc'])) {
+            // todo proper exception
+            throw new Exception('Unsupported action for this extension');
+        }
+
+        return "{$actionUrl['urlsrc']}WOPISrc={$url}";
     }
 
     /**
@@ -164,6 +285,7 @@ abstract class AbstractDocumentManager
                         ];
                     }
                 })
+                ->filter(fn ($value) => $value !== null)
                 ->toArray();
     }
 }

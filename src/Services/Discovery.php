@@ -72,6 +72,7 @@ class Discovery
         }
 
         $action = current($return);
+
         return ! $action ? null : $action;
     }
 
