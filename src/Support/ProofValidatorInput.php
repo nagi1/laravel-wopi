@@ -33,7 +33,7 @@ class ProofValidatorInput
         return $this;
     }
 
-    public static function fromRequest(Request $request): static
+    public static function fromRequest(Request $request): self
     {
         $url = RequestHelper::parseUrl($request);
         $accessToken = RequestHelper::getAccessTokenFromUrl($url);

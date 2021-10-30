@@ -15,7 +15,7 @@ class TestDocumentManager extends AbstractDocumentManager
         return $this;
     }
 
-    public static function find(string $fileId): static
+    public static function find(string $fileId) :self
     {
         $filesDatabase = collect(json_decode(file_get_contents(__DIR__.'/files.json'), true));
         $file = $filesDatabase->first(fn (array $item) => $item['id'] === $fileId);
@@ -23,7 +23,7 @@ class TestDocumentManager extends AbstractDocumentManager
         return new static($file);
     }
 
-    public static function findByName(string $filename): static
+    public static function findByName(string $filename) :self
     {
         $filesDatabase = collect(json_decode(file_get_contents(__DIR__.'/files.json'), true));
         $file = $filesDatabase->first(fn (array $item) => $item['basename'] === $filename);
@@ -31,7 +31,7 @@ class TestDocumentManager extends AbstractDocumentManager
         return new static($file);
     }
 
-    public static function create(array $properties): static
+    public static function create(array $properties) :self
     {
         return new static($properties);
     }

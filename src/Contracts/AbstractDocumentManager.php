@@ -82,21 +82,21 @@ abstract class AbstractDocumentManager
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    abstract public static function find(string $fileId): static;
+    abstract public static function find(string $fileId): self;
 
     /**
      * Preform look up for the file/document by filename.
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    abstract public static function findByName(string $filename): static;
+    abstract public static function findByName(string $filename): self;
 
     /**
      * Create new document instace on the host.
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    abstract public static function create(array $properties): static;
+    abstract public static function create(array $properties): self;
 
     /**
      * Unique id that identifies single file could be numbers
@@ -197,7 +197,7 @@ abstract class AbstractDocumentManager
     /**
      * Manually set user id.
      */
-    public function setUserId(string $userId): static
+    public function setUserId(string $userId): self
     {
         $this->userId = $userId;
 
@@ -244,7 +244,7 @@ abstract class AbstractDocumentManager
     /**
      * Manually set user id using closure.
      */
-    public function getUserUsing(Closure $calback): static
+    public function getUserUsing(Closure $calback): self
     {
         $this->userId = $calback;
 
