@@ -26,7 +26,7 @@ class ProofValidator
     private ProofValidatorInput $proofValidatorInput;
 
     public function __construct(
-        ConfigRepositoryInterface $config,
+        ConfigRepositoryInterface $config
     ) {
         $this->config = $config;
     }

@@ -2,7 +2,7 @@
 
 namespace Nagi\LaravelWopi\Contracts\Concerns;
 
-interface OverrideGetFileContentUrl
+interface OverrideDownloadAction
 {
     /**
      * A URI to the file location that the WOPI client uses to get the file.

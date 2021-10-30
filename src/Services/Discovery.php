@@ -12,7 +12,7 @@ class Discovery
     private ConfigRepositoryInterface $config;
 
     public function __construct(
-        ConfigRepositoryInterface $config,
+        ConfigRepositoryInterface $config
     ) {
         $this->config = $config;
     }

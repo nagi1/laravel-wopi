@@ -9,7 +9,6 @@ $rules = [
         'ordered_imports' => ['sort_algorithm' => 'alpha'],
         'no_unused_imports' => true,
         'not_operator_with_successor_space' => true,
-        'trailing_comma_in_multiline' => true,
         'phpdoc_scalar' => true,
         'unary_operator_spaces' => true,
         'binary_operator_spaces' => true,
@@ -131,7 +130,7 @@ $rules = [
     'switch_case_semicolon_to_colon' => true,
     'switch_case_space' => true,
     'ternary_operator_spaces' => true,
-    'trailing_comma_in_multiline' => ['elements' => ['arrays']],
+    'trailing_comma_in_multiline' => false,
     'trim_array_spaces' => true,
     'unary_operator_spaces' => true,
     'visibility_required' => [
