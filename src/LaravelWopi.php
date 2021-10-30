@@ -22,7 +22,8 @@ class LaravelWopi implements WopiInterface
     }
 
     public function getFile(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
+        /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
         $document = $documentManager::find($fileId);
@@ -31,7 +32,7 @@ class LaravelWopi implements WopiInterface
         return response()->stream(function () use ($document) {
             echo $document->content();
         }, 200, [
-            WopiInterface::HEADER_ITEM_VERSION => sprintf('v%s', $document->version()),
+            WopiInterface::HEADER_ITEM_VERSION => $document->version(),
             'Content-Type' => 'application/octet-stream',
             'Content-Length' => $document->size(),
             'Content-Disposition' => sprintf('attachment; filename=%s', $document->basename()),
@@ -39,10 +40,10 @@ class LaravelWopi implements WopiInterface
     }
 
     public function putFile(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
+        /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
-        /** @var AbstractDocumentManager */
         $document = $documentManager::find($fileId);
 
         $version = $document->version();
@@ -84,10 +85,10 @@ class LaravelWopi implements WopiInterface
     }
 
     public function lock(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
+        /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
-        /** @var AbstractDocumentManager */
         $document = $documentManager::find($fileId);
 
         $version = $document->version();
@@ -116,10 +117,10 @@ class LaravelWopi implements WopiInterface
     }
 
     public function unlock(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
+        /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
-        /** @var AbstractDocumentManager */
         $document = $documentManager::find($fileId);
 
         $version = $document->version();
@@ -158,10 +159,10 @@ class LaravelWopi implements WopiInterface
     }
 
     public function getLock(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
+        /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
-        /** @var AbstractDocumentManager */
         $document = $documentManager::find($fileId);
 
         if ($document->isLocked()) {
@@ -188,7 +189,7 @@ class LaravelWopi implements WopiInterface
     }
 
     public function deleteFile(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
         $documentManager = app(AbstractDocumentManager::class);
 
         /** @var AbstractDocumentManager */
@@ -205,11 +206,19 @@ class LaravelWopi implements WopiInterface
         return response('', 200);
     }
 
-    public function renameFile(string $fileId, string $accessToken, string $requestedName, Request $request)
-    {/** @var AbstractDocumentManager */
-        $documentManager = app(AbstractDocumentManager::class);
+    public function renameFile(string $fileId, string $accessToken, Request $request)
+    {
+        $requestedName = $request->hasHeader(WopiInterface::HEADER_REQUESTED_NAME) ?
+        mb_convert_encoding($request->header(WopiInterface::HEADER_REQUESTED_NAME), 'UTF-8', 'UTF-7') :
+        false;
+
+        if (! $requestedName) {
+            return response('', 400);
+        }
 
         /** @var AbstractDocumentManager */
+        $documentManager = app(AbstractDocumentManager::class);
+
         $document = $documentManager::find($fileId);
 
         if ($document->isLocked()) {
@@ -248,10 +257,10 @@ class LaravelWopi implements WopiInterface
     }
 
     public function putRelativeFile(string $fileId, string $accessToken, Request $request)
-    {/** @var AbstractDocumentManager */
+    {
+        /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
-        /** @var AbstractDocumentManager */
         $document = $documentManager::find($fileId);
 
         // This operation has two distinct modes: specific and suggested. The

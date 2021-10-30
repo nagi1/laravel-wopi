@@ -5,14 +5,14 @@ return [
 
     'wopi_implementation' => Nagi\LaravelWopi\LaravelWopi::class,
 
+    'wopi_request' =>  Nagi\LaravelWopi\Http\Requests\WopiRequest::class,
+
     // Todo implement example storage manager
     'document_manager' =>  null,
 
-    'wopi_request' =>  Nagi\LaravelWopi\Http\Requests\WopiRequest::class,
-
     'server_url' => env('WOPI_SERVER_URL', ''),
 
-    'access_token_ttl' => env('WOPI_ACCESS_TOKEN_TTL', ''),
+    'access_token_ttl' => env('WOPI_ACCESS_TOKEN_TTL', 0),
 
     'enable_proof_validation' => true,
 

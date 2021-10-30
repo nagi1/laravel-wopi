@@ -5,12 +5,12 @@ namespace Nagi\LaravelWopi;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Nagi\LaravelWopi\LaravelWopi
+ * @see \Nagi\LaravelWopi\
  */
 class LaravelWopiFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'laravel-wopi';
+        return LaravelWopi::class;
     }
 }

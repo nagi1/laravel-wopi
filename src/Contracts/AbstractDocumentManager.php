@@ -182,7 +182,7 @@ abstract class AbstractDocumentManager
     /**
      * Change document contents.
      */
-    abstract public function put(string $content, array $editorsIds = []);
+    abstract public function put(string $content, array $editorsIds = []): void;
 
     /**
      * Delete the lock on the document.

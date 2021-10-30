@@ -145,7 +145,6 @@ $finder = Finder::create()
     ->in([
         $project_path.'/src',
         $project_path.'/config',
-        $project_path.'/database',
         $project_path.'/resources',
         $project_path.'/tests',
     ])

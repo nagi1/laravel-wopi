@@ -6,6 +6,26 @@ use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
 
 class TestingConfigRepositroy implements ConfigRepositoryInterface
 {
+    public function supportDelete(): bool
+    {
+        return true;
+    }
+
+    public function supportUpdate(): bool
+    {
+        return true;
+    }
+
+    public function supportRename(): bool
+    {
+        return true;
+    }
+
+    public function supportLocks(): bool
+    {
+        return true;
+    }
+
     public function getEnableProofValidation(): bool
     {
         return true;

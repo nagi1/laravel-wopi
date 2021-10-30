@@ -57,7 +57,7 @@ interface WopiInterface
      *
      * @param string $accessToken raw access token
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse must return binary response.
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse must return binary response.
      */
     public function getFile(string $fileId, string $accessToken, Request $request);
 
@@ -139,7 +139,7 @@ interface WopiInterface
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function renameFile(string $fileId, string $accessToken, string $requestedName, Request $request);
+    public function renameFile(string $fileId, string $accessToken, Request $request);
 
     /**
      * Creates a new file on the host based on the

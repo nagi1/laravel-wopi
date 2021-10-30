@@ -6,12 +6,12 @@ use Nagi\LaravelWopi\Contracts\WopiInterface;
 use Nagi\LaravelWopi\Http\Requests\WopiRequest;
 use Nagi\LaravelWopi\Support\RequestHelper;
 
-class RenameFileController extends WopiBaseController
+class DeleteFileController extends WopiBaseController
 {
     public function __invoke(WopiRequest $request, string $fileId, WopiInterface $wopiImplementation)
     {
         $accessToken = RequestHelper::parseAccessToken($request);
 
-        return $wopiImplementation->renameFile($fileId, $accessToken, $request);
+        return $wopiImplementation->deleteFile($fileId, $accessToken, $request);
     }
 }

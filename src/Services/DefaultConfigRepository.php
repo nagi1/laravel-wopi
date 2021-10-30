@@ -5,13 +5,32 @@ namespace Nagi\LaravelWopi\Services;
 use Exception;
 use Illuminate\Support\Facades\Http;
 use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class DefaultConfigRepository implements ConfigRepositoryInterface
 {
+    public function supportDelete(): bool
+    {
+        return config('wopi.support_delete');
+    }
+
+    public function supportUpdate(): bool
+    {
+        return config('wopi.support_update');
+    }
+
+    public function supportRename(): bool
+    {
+        return config('wopi.support_rename');
+    }
+
+    public function supportLocks(): bool
+    {
+        return config('wopi.support_locks');
+    }
+
     public function getEnableProofValidation(): bool
     {
-        return config('wopi.enable_proof_validation', true);
+        return config('wopi.enable_proof_validation');
     }
 
     public function getWopiServerUrl(): string
@@ -26,7 +45,7 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
 
     public function getAccessTokenTTL(): int
     {
-        return config('wopi.access_token_ttl', 0);
+        return config('wopi.access_token_ttl');
     }
 
     public function getDiscoveryXMLConfigFile(): ?string
@@ -36,8 +55,8 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
         $response = Http::get($url);
 
         if ($response->status() !== 200) {
-            // Todo create not found exception
-            throw new NotFoundResourceException("Could not reach to the configuration xml file from {$url}");
+            // Todo create proper not found exception
+            throw new Exception("Could not reach to the configuration discovery.xml file from {$url}");
         }
 
         return $response->body();
