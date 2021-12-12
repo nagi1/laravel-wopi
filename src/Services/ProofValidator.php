@@ -3,7 +3,6 @@
 namespace Nagi\LaravelWopi\Services;
 
 use Carbon\CarbonImmutable;
-use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
 use Nagi\LaravelWopi\Facades\Discovery;
 use Nagi\LaravelWopi\Support\DotNetTimeConverter;
 use Nagi\LaravelWopi\Support\ProofValidatorInput;
@@ -21,24 +20,10 @@ use phpseclib\Math\BigInteger;
  */
 class ProofValidator
 {
-    private ConfigRepositoryInterface $config;
-
     private ProofValidatorInput $proofValidatorInput;
-
-    public function __construct(
-        ConfigRepositoryInterface $config
-    ) {
-        $this->config = $config;
-    }
 
     public function isValid(ProofValidatorInput $proofValidatorInput): bool
     {
-
-        // pass validation if the proof validation is disabled
-        if (! $this->config->getEnableProofValidation()) {
-            return true;
-        }
-
         $this->proofValidatorInput = $proofValidatorInput;
 
         // Check if X-WOPI-PROOF header is present
@@ -65,7 +50,7 @@ class ProofValidator
 
         // Verifying the proof keys, check three combinations of proof
         // key values. If any one of the values is valid the request
-        // was signed by Office/Libreoffice for the web.
+        // was signed by Office/WOPI host for the web.
         return
             // The X-WOPI-Proof value using the current public key.
                $this->verify($expected, $wopiSignedProofHeader, $key)

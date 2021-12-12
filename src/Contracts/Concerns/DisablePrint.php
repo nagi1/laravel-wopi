@@ -6,7 +6,7 @@ interface DisablePrint
 {
     /**
      * Indicates the WOPI client should disable all print.
-     * functionality in libreoffice online backend. If
+     * functionality in WOPI host online backend. If
      * true, HidePrintOption is assumed to be true.
      */
     public function disablePrint(): bool;

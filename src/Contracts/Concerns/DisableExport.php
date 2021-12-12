@@ -6,7 +6,7 @@ interface DisableExport
 {
     /**
      * Indicates the WOPI client should disable all export.
-     * functionality in libreoffice online backend. If
+     * functionality in WOPI host online backend. If
      * true, HideExportOption is assumed to be true.
      */
     public function disableExport(): bool;

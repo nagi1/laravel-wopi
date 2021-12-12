@@ -5,10 +5,11 @@
 build
 composer.lock
 coverage
-docs
+docs/node_modules/**
 phpunit.xml
 psalm.xml
 testbench.yaml
 vendor
 node_modules
 .php-cs-fixer.cache
+**/node_modules/**

@@ -1,9 +1,9 @@
-Todo Logo here
+![Logo](media/logo.png)
 
 # Laravel Wopi Host
 
 ---
-Implementation of the WOPI protocol to facilitate intergration with LibreOffice and office online using Laravel.
+Implementation of the WOPI protocol to facilitate intergration with WOPI host and office online using Laravel.
 
 ## 📃 Description
 

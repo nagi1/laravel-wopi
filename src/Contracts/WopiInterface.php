@@ -164,4 +164,18 @@ interface WopiInterface
      * @return \Illuminate\Http\Response
      */
     public function enumerateAncestors(string $fileId, string $accessToken, Request $request);
+
+    /**
+     * Stores basic user information on the host. Hosts must store
+     * the UserInfo string which is contained in the body of the
+     * request. The UserInfo string should be associated with a
+     * particular user, and should be passed back to the WOPI.
+     *
+     * @param string $fileId
+     * @param string $accessToken
+     * @param \Illuminate\Http\Request $request Contains body has a maximum size of 1024 ASCII characters.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function putUserInfo(string $fileId, string $accessToken, Request $request);
 }

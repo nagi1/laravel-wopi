@@ -41,13 +41,13 @@ class Discovery
 
         if (! $simpleXmlElement) {
             // TODO make proper exception
-            throw new Exception('Unable to parse XML.');
+            throw new Exception('Unable to parse the XML in "discovery.xml" file.');
         }
 
         return $simpleXmlElement;
     }
 
-    public function discoverAction(string $extension, string $name = 'view'): ?array
+    public function discoverAction(string $extension, string $name = 'edit'): ?array
     {
         $appElements = $this->queryXPath('//net-zone/app');
 
@@ -84,6 +84,33 @@ class Discovery
 
         foreach ($appElements as $app) {
             $actions = $app->xpath(sprintf("action[@ext='%s']", $extension));
+
+            if (! $actions) {
+                continue;
+            }
+
+            foreach ($actions as $action) {
+                $actionAttributes = $action->attributes() ?: [];
+
+                $extensions[] = array_merge(
+                    (array) reset($actionAttributes),
+                    ['name' => (string) $app['name']],
+                    ['favIconUrl' => (string) $app['favIconUrl']]
+                );
+            }
+        }
+
+        return $extensions;
+    }
+
+    public function discoverAvilableActions(): array
+    {
+        $appElements = $this->queryXPath('//net-zone/app');
+
+        $extensions = [];
+
+        foreach ($appElements as $app) {
+            $actions = $app->xpath('action[@ext]');
 
             if (! $actions) {
                 continue;

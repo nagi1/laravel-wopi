@@ -12,9 +12,15 @@ class ValidateProof
 {
     public function handle(Request $request, Closure $next)
     {
+        // Be carefull with database based config!
         $isproofValidationEnabled = app(ConfigRepositoryInterface::class)->getEnableProofValidation();
 
-        if ($isproofValidationEnabled && ProofValidator::isValid(ProofValidatorInput::fromRequest($request))) {
+
+        if (! $isproofValidationEnabled) {
+            return $next($request);
+        }
+
+        if (ProofValidator::isValid(ProofValidatorInput::fromRequest($request))) {
             return $next($request);
         }
 

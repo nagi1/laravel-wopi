@@ -8,6 +8,16 @@ use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
 
 class DefaultConfigRepository implements ConfigRepositoryInterface
 {
+    public function supportUserInfo(): bool
+    {
+        return config('wopi.support_user_info');
+    }
+
+    public function getDefaultUiLang(): string
+    {
+        return config('wopi.ui_language');
+    }
+
     public function supportDelete(): bool
     {
         return config('wopi.support_delete');
@@ -28,19 +38,25 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
         return config('wopi.support_locks');
     }
 
+    public function supportGetLocks(): bool
+    {
+        return config('wopi.support_get_locks');
+    }
+
+    public function supportExtendedLockLength(): bool
+    {
+        return config('wopi.support_extended_lock_length');
+    }
+
     public function getEnableProofValidation(): bool
     {
-        return config('wopi.enable_proof_validation');
+        return  config('wopi.enable_proof_validation');
+        // return !App::isProduction() && config('wopi.enable_proof_validation');
     }
 
-    public function getWopiServerUrl(): string
+    public function getWopiClientUrl(): string
     {
-        return config('wopi.server_url');
-    }
-
-    public function getWopiServerPort(): string
-    {
-        return config('wopi.server_port');
+        return config('wopi.client_url');
     }
 
     public function getAccessTokenTTL(): int
@@ -48,10 +64,14 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
         return config('wopi.access_token_ttl');
     }
 
+    public function getMiddleware(): array
+    {
+        return config('wopi.middleware');
+    }
+
     public function getDiscoveryXMLConfigFile(): ?string
     {
-        // Todo normalize path
-        $url = "{$this->getWopiServerUrl()}/hosting/discovery";
+        $url = "{$this->getWopiClientUrl()}/hosting/discovery";
         $response = Http::get($url);
 
         if ($response->status() !== 200) {

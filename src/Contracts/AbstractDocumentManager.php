@@ -4,10 +4,14 @@ namespace Nagi\LaravelWopi\Contracts;
 
 use Closure;
 use Exception;
+use Illuminate\Support\Str;
+use Nagi\LaravelWopi\Contracts\Traits\SupportLocks;
 use Nagi\LaravelWopi\Facades\Discovery;
 
 abstract class AbstractDocumentManager
 {
+    use SupportLocks;
+
     /**
      * No properties should be set to null. If you do not wish
      * to set a property, simply omit it from the response
@@ -20,6 +24,7 @@ abstract class AbstractDocumentManager
         'Size' => 'size',
         'Version' => 'version',
         'UserId' => 'userId',
+        'UserFriendlyName' => 'userFriendlyName',
 
         // Permission properties
         'ReadOnly' => 'isReadOnly',
@@ -59,12 +64,17 @@ abstract class AbstractDocumentManager
         // Disable copy
         'DisableCopy' => 'disableCopy',
 
+        // Interacts with user info
+        'UserInfo' => 'getUserInfo',
+        'SupportsUserInfo' => 'supportUserInfo',
+
         // Override supported features
         'SupportsDeleteFile' => 'supportDelete',
         'SupportsLocks' => 'supportLocks',
+        'SupportsGetLock' => 'supportGetLock',
         'SupportsUpdate' => 'supportUpdate',
         'SupportsRename' => 'supportRename',
-        // 'SupportsUserInfo' => 'supportUserInfo',
+        'SupportsExtendedLockLength' => 'supportExtendedLockLength',
 
     ];
 
@@ -105,13 +115,10 @@ abstract class AbstractDocumentManager
      */
     abstract public function id(): string;
 
-    public function supportLocks(): bool
-    {
-        /** @var ConfigRepositoryInterface */
-        $config = app(ConfigRepositoryInterface::class);
-
-        return $config->supportLocks();
-    }
+    /**
+     * Friendly name for current edting user.
+     */
+    abstract public function userFriendlyName(): string;
 
     public function supportUpdate(): bool
     {
@@ -213,12 +220,12 @@ abstract class AbstractDocumentManager
         $defaultUserId = $this->defaultUser();
 
         if ($this->userId instanceof Closure) {
-            $userId = call_user_func($this->userId);
+            $userId = call_user_func($this->userId, $this);
 
             return empty($userId) ? $defaultUserId : $userId;
         }
 
-        return empty($this->userId) ? $defaultUserId : $this->userId;
+        return (string) empty($this->userId) ? $defaultUserId : $this->userId;
     }
 
     /**
@@ -226,6 +233,7 @@ abstract class AbstractDocumentManager
      */
     protected function defaultUser(): string
     {
+        // Todo config this
         return 'Unknown User';
     }
 
@@ -251,24 +259,32 @@ abstract class AbstractDocumentManager
         return $this;
     }
 
-    public function getUrlForAction(string $action): string
+    public function getUrlForAction(string $action, string $lang = 'en-US'): string
     {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
+
         $extension = method_exists($this, 'extension')
-            ? $this->extension()
-            : optional(pathinfo($this->basename()))['extension'];
+            ? Str::replaceFirst('.', '', $this->extension())
+            : pathinfo($this->basename(), PATHINFO_EXTENSION);
 
         $url = route('wopi.checkFileInfo', [
             'file_id' => $this->id(),
         ]);
 
+        // todo handle microsoft office 365 <> placeholders
+        // example https://FFC-onenote.officeapps.live.com/hosting/WopiTestFrame.aspx?<ui=UI_LLCC&><rs=DC_LLCC&><dchat=DISABLE_CHAT&><hid=HOST_SESSION_ID&><sc=SESSION_CONTEXT&><wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&><testcategory=VALIDATOR_TEST_CATEGORY>
+
         $actionUrl = optional(Discovery::discoverAction($extension, $action));
 
         if (is_null($actionUrl['urlsrc'])) {
             // todo proper exception
-            throw new Exception('Unsupported action for this extension');
+            throw new Exception("Unsupported action \"{$action}\" for \"{$extension}\" extension.");
         }
 
-        return "{$actionUrl['urlsrc']}WOPISrc={$url}";
+        return "{$actionUrl['urlsrc']}lang={$lang}&WOPISrc={$url}";
     }
 
     /**

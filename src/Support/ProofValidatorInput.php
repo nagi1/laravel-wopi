@@ -19,10 +19,10 @@ class ProofValidatorInput
 
     public function __construct(
         ?string $accessToken,
-        string $timestamp,
-        string $url,
-        string $proof,
-        string $oldProof
+        ?string $timestamp,
+        ?string $url,
+        ?string $proof,
+        ?string $oldProof
     ) {
         $this->accessToken = is_null($accessToken) ? RequestHelper::getAccessTokenFromUrl($url) : $accessToken;
         $this->timestamp = $timestamp;

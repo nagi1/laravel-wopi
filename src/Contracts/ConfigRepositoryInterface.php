@@ -4,7 +4,9 @@ namespace Nagi\LaravelWopi\Contracts;
 
 interface ConfigRepositoryInterface
 {
-    public function getWopiServerUrl(): string;
+    public function getWopiClientUrl(): string;
+
+    public function getDefaultUiLang(): string;
 
     public function getDiscoveryXMLConfigFile(): ?string;
 
@@ -19,4 +21,12 @@ interface ConfigRepositoryInterface
     public function supportRename(): bool;
 
     public function supportLocks(): bool;
+
+    public function supportGetLocks(): bool;
+
+    public function supportExtendedLockLength(): bool;
+
+    public function supportUserInfo(): bool;
+
+    public function getMiddleware(): array;
 }
