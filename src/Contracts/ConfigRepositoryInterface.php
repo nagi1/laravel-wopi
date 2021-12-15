@@ -29,4 +29,6 @@ interface ConfigRepositoryInterface
     public function supportUserInfo(): bool;
 
     public function getMiddleware(): array;
+
+    public function getDefaultUser(): string;
 }

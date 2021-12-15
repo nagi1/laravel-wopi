@@ -59,6 +59,11 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
         return config('wopi.client_url');
     }
 
+    public function getDefaultUser(): string
+    {
+        return config('wopi.default_user');
+    }
+
     public function getAccessTokenTTL(): int
     {
         return config('wopi.access_token_ttl');
@@ -75,8 +80,7 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
         $response = Http::get($url);
 
         if ($response->status() !== 200) {
-            // Todo create proper not found exception
-            throw new Exception("Could not reach to the configuration discovery.xml file from {$url}");
+            throw new Exception("Could not reach to the configuration discovery.xml file from {$url}.");
         }
 
         return $response->body();

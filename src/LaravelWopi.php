@@ -16,7 +16,6 @@ class LaravelWopi implements WopiInterface
         /** @var AbstractDocumentManager */
         $documentManager = app(AbstractDocumentManager::class);
 
-        // Todo implement some sort of caching mechanism
         $document = $documentManager::find($fileId);
 
         return response()->json($document->getResponseProprties());
@@ -387,7 +386,7 @@ class LaravelWopi implements WopiInterface
         $properties = [
             'Name' => $newDocument->basename(),
             'Url' => (string) $generateUrl($newDocument->id()),
-            // Todo consider suppoting this features correctly
+            // Todo support this features correctly
             'HostEditUrl' => (string) $generateUrl($newDocument->id()),
             'HostViewUrl' => (string) $generateUrl($newDocument->id()),
         ];

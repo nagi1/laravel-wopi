@@ -233,8 +233,10 @@ abstract class AbstractDocumentManager
      */
     protected function defaultUser(): string
     {
-        // Todo config this
-        return 'Unknown User';
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        return $config->getDefaultUser();
     }
 
     /**
@@ -259,6 +261,14 @@ abstract class AbstractDocumentManager
         return $this;
     }
 
+    /**
+     * Convenient method for getUrlForAction.
+     */
+    public function generateUrl(string $lang = 'en-Us'): string
+    {
+        return $this->getUrlForAction('edit', $lang);
+    }
+
     public function getUrlForAction(string $action, string $lang = 'en-US'): string
     {
         /** @var ConfigRepositoryInterface */
@@ -280,7 +290,6 @@ abstract class AbstractDocumentManager
         $actionUrl = optional(Discovery::discoverAction($extension, $action));
 
         if (is_null($actionUrl['urlsrc'])) {
-            // todo proper exception
             throw new Exception("Unsupported action \"{$action}\" for \"{$extension}\" extension.");
         }
 

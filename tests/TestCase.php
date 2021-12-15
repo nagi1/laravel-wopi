@@ -2,10 +2,8 @@
 
 namespace Nagi\LaravelWopi\Tests;
 
-use Nagi\LaravelWopi\Contracts\AbstractDocumentManager;
 use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
 use Nagi\LaravelWopi\LaravelWopiServiceProvider;
-use Nagi\LaravelWopi\Tests\Implementations\TestDocumentManager;
 use Nagi\LaravelWopi\Tests\Implementations\TestingConfigRepositroy;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -31,11 +29,6 @@ class TestCase extends Orchestra
         $app->bind(
             ConfigRepositoryInterface::class,
             TestingConfigRepositroy::class
-        );
-
-        $app->bind(
-            AbstractDocumentManager::class,
-            TestDocumentManager::class
         );
     }
 }

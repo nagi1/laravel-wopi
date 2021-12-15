@@ -15,7 +15,6 @@ class ValidateProof
         // Be carefull with database based config!
         $isproofValidationEnabled = app(ConfigRepositoryInterface::class)->getEnableProofValidation();
 
-
         if (! $isproofValidationEnabled) {
             return $next($request);
         }
@@ -24,7 +23,6 @@ class ValidateProof
             return $next($request);
         }
 
-        // todo check response in docs
         return abort(500);
     }
 }

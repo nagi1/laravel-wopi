@@ -36,12 +36,11 @@ class Discovery
 
     public function discover(string $rawXmlString): SimpleXMLElement
     {
-        // Todo create cache manager to determine how and when the cache is busted
+        // todo implement cache
         $simpleXmlElement = simplexml_load_string($rawXmlString);
 
         if (! $simpleXmlElement) {
-            // TODO make proper exception
-            throw new Exception('Unable to parse the XML in "discovery.xml" file.');
+            throw new Exception('Unable to parse the "discovery.xml" file.');
         }
 
         return $simpleXmlElement;
@@ -171,7 +170,6 @@ class Discovery
 
     public function getPublicKey(): string
     {
-        // Todo cache keys with the cache manager
         return (string) $this->queryXPath('//proof-key/@value')[0];
     }
 

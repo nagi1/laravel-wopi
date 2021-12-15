@@ -9,7 +9,7 @@ return [
     'document_manager' =>  null,
 
      /*
-     * Default UI langauge. See
+     * Default UI langauge.
      */
     'ui_language' =>  'en-US',
     /*
@@ -60,7 +60,14 @@ return [
     'support_delete' => false,
 
     /*
+     * Default user name string that will appear in case
+     * no user passed to the client.
+     */
+    'default_user' => 'Unknown User',
+
+    /*
      * Enable/disable support for renaming documents.
+     *
      * @default false
      */
     'support_rename' => false,
