@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklaravel_wopi_docs=self.webpackChunklaravel_wopi_docs||[]).push([[477],{10:function(s){s.exports={blogPosts:[]}}}]);
