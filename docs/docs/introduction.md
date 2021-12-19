@@ -22,10 +22,10 @@ Laravel WOPI is an **intergation solution** and WOPI host *(server)* implemntati
 
 🌐 Working example inculded!
 
-![Logo](/img/logo.png)
+![Logo](/img/banner.png)
 
 ## Getting Started
 
-Every server needs a client to serve, so If you don't office clinet installed, you may follow this guide on how to install Collabora Online using docker before getting started.
+Every server needs a client to serve, so If you don't office client installed, you may follow [this guide](https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html) on how to install Collabora Online using docker before getting started.
 
-Or skip a head and goto [Gettings Started](getting-started.md) Section.
+Or skip a head and goto [Gettings Started](getting-started/installation.md) Section.

@@ -6,12 +6,12 @@ return [
      * this configration left empty to be implemented by the user There's
      * plans to implement example storage manager in the future though.
      */
-    'document_manager' =>  null,
+    'document_manager' => null,
 
      /*
      * Default UI langauge.
      */
-    'ui_language' =>  'en-US',
+    'ui_language' => 'en-US',
     /*
      * Here, you can customize how would you like to retrive
      * all of the diffrent configration options.

@@ -1,9 +1,9 @@
-![Logo](media/logo.png)
+![Logo](media/banner.png)
 
 # Laravel Wopi Host
 
 ---
-Implementation of the WOPI protocol to facilitate intergration with WOPI host and office online using Laravel.
+Implementation of the WOPI protocol to facilitate intergration with office online and other WOPI-compatible clients using Laravel.
 
 ## 📃 Description
 
@@ -14,36 +14,43 @@ WOPI protocol enables Office for the web to access and change files that are sto
 
 Supports:
 
-* [Collabora Office](#) (Recommended)
-* [Office 365](#)
+* [Collabora Office](https://www.collaboraoffice.com/) (Recommended)
+* [Office 365](https://www.office.com/) (in-progress)
+* [OnlyOffice](https://www.onlyoffice.com/en/about.aspx)
+
+## 📕 Documentation
+
+You'll find the documentation on [https://docs.spatie.be/laravel-activitylog](#).
+
+Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the wopi implementation? Feel free to create an issue on GitHub, we'll try to address it as soon as possible.
+
+## ⚡ Demo/Example
+
+Demo app can be found at [https://github.com/nagi1/wopi-host-example](https://github.com/nagi1/wopi-host-example)
+
+## 🧪 Tested
+
+This package has been tested using [Wopi Validator](https://github.com/microsoft/wopi-validator-core).
+
+👇👇👇
+![testing](media/test-screenshot.png)
+
+
+test Proof-validator `vendor/bin/pest`.
+
+ 👇👇👇
+
+![testing](media/proof-validtor-test.png)
 
 ## ⚠ Important
 
-This project is in alpha and under heavy development, please dont use it in production yet ❗
-
-Consider reading [Contribution Guide](#) to help bring this project to life.
-
-
-Todo Demo
-
-## 🚀 Getting Started
-
-Because every application have diffrent requirements and implementation this project provides the tools and documentation to ease integration.
-
-## Installation
-
-```bash
-composer require nagi/laravel-wop
-```
-
-## Contribution Guide
+This package isn't fully ready to work with Microsoft Office online because it lacks the ability to parse discovery urls. Feel free to Open PR or contact me to work on this togher in case you need it.
 
 ## Credits
 
-This project build upon and extends Pol Dellaiera [Wopi-lib](https://github.com/Champs-Libres/wopi-lib).
-
 - [Ahmed Nagi](https://github.com/nagi1)
-- [All Contributors](../../contributors)
+
+This project build upon and extends but not limited to Pol Dellaiera's [Wopi-lib](https://github.com/Champs-Libres/wopi-lib).
 
 ## License
 

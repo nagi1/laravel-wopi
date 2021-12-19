@@ -18,7 +18,7 @@ composer require nagi/laravel-wopi
 - Installed and configured WOPI client.
 
 :::tip
-**Don't have WOPI Client yet?** Follow this guide to install [Collabora Online](#).
+**Don't have WOPI Client yet?** Follow this guide to install [Collabora Online](https://sdk.collaboraonline.com/docs/installation/CODE_Docker_image.html).
 :::
 
 ## 1-Config
@@ -29,7 +29,7 @@ Publish the required config file using by
 php artisan vendor:publish --tag=laravel-wopi-config
 ```
 
-You can view all available confugration options and full explanation in the [Configuration Section](getting-started.md).
+You can view all available confugration options and full explanation in the [Configuration Section](configuration.md).
 
 Set `WOPI_CLIENT_URL` in your `.env` file with full url to your wopi client.
 
@@ -45,9 +45,9 @@ WOPI_CLIENT_URL="https://demo.eu.collaboraonline.com"
 
 Every application has it's own implementation of how it handles documents, It's pretty much impossible to implement one general purpose document manager that fits all usecases. So you **Need** to implement your own `DocumentManager` but don't you worry this package provides a `AbstractDocumentManager` that will ease your task quite a bit.
 
-Take this example implementation from [configuration page](#).
+Take this example implementation from [Laravel wopi example](https://github.com/nagi1/laravel-wopi-example).
 
-- See [Document Manager Section](getting-started.md) for more details about `AbstractDocumentManager`.
+- See [Document Manager Section](document-manager#example-document-manager-implementation) for more details about `AbstractDocumentManager`.
 
 ## 3-User your document manager
 
@@ -129,7 +129,7 @@ For example
 Query your document manager to get any [supported Docuemnt](#) like so
 
 ```php
-// In web.php
+// In web.php/your controller
 Route::get('/', function (Request $request) {
     $document = app(AbstractDocumentManager::class)::find(1);
 
@@ -137,24 +137,21 @@ Route::get('/', function (Request $request) {
     $accessToken = 'My_Token';
     $ttl = 0;
 
-    return view('laravel-wopi-test', ['accessToken' => $accessToken, 'ttl' => $ttl, 'url' => $document->getUrlForAction('edit')]);
+    return view('laravel-wopi-test', [
+        'accessToken' => $accessToken,
+        'ttl' => $ttl,
+        'url' => $document->generateUrl()
+        ]);
 });
 
 ```
 
 Open your application and voalla!
 
-Image here
+![Logo](/img/office_docx_app.png)
 
 You have your self a working google docs in the comfort of your app!
 
-## Project structure {#project-structure}
-
-### Project structure rundown {#project-structure-rundown}
-
-- `/blog/` - Contains the blog Markdown files. You can delete the directory if you do not want/need a blog. More details can be found in the [blog guide](blog.mdx)
-- `/docs/` - Contains the Markdown files for the docs. Customize the order of the docs sidebar in `sidebars.js`.
-
 ## Problems? {#problems}
 
-Ask for help on [Stack Overflow](https://stackoverflow.com/questions/tagged/docusaurus), on our [GitHub repository](https://github.com/facebook/docusaurus) or [Twitter](https://twitter.com/docusaurus).
+Ask for help on [Stack Overflow](https://stackoverflow.com/questions/tagged/laravel-wopi), on our [GitHub repository](https://github.com/nagi1/laravel-wopi) or [Twitter](https://twitter.com/nagiworks).
