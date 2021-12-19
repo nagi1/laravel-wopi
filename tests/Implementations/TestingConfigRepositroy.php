@@ -8,36 +8,42 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
 {
     public function getWopiClientUrl(): string
     {
-        return 'http://localhost:9980';
+        return '';
     }
 
     public function getDefaultUiLang(): string
     {
+        return '';
     }
 
     public function supportGetLocks(): bool
     {
+        return '';
     }
 
     public function supportExtendedLockLength(): bool
     {
+        return '';
     }
 
     public function supportUserInfo(): bool
     {
+        return false;
     }
 
     public function getMiddleware(): array
     {
+        return [];
     }
 
     public function getDefaultUser(): string
     {
+        return '';
     }
 
     public function supportDelete(): bool
     {
-        return true;
+        return false;
     }
 
     public function supportUpdate(): bool
