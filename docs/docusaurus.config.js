@@ -9,7 +9,7 @@ const config = {
     title: "Laravel-wopi Docs",
     tagline: "Integrating office into your laravel apps",
     url: "https://nagi1.github.io",
-    baseUrl: "/",
+    baseUrl: "/laravel-wopi/",
     onBrokenLinks: "throw",
     trailingSlash: false,
     onBrokenMarkdownLinks: "warn",
