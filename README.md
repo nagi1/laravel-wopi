@@ -20,7 +20,7 @@ Supports:
 
 ## 📕 Documentation
 
-You'll find the documentation on [https://docs.spatie.be/laravel-activitylog](#).
+You'll find the documentation on [https://nagi1.github.io/laravel-wopi/docs](https://nagi1.github.io/laravel-wopi/docs).
 
 Find yourself stuck using the package? Found a bug? Do you have general questions or suggestions for improving the wopi implementation? Feel free to create an issue on GitHub, we'll try to address it as soon as possible.
 
