@@ -26,7 +26,7 @@ composer require nagi/laravel-wopi
 Publish the required config file using by
 
 ```bash
-php artisan vendor:publish --tag=laravel-wopi-config
+php artisan vendor:publish --tag=wopi-config
 ```
 
 You can view all available confugration options and full explanation in the [Configuration Section](configuration.md).
