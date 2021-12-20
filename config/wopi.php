@@ -32,7 +32,8 @@ return [
     'wopi_request' =>  Nagi\LaravelWopi\Http\Requests\WopiRequest::class,
 
     /*
-     * Type some shit here
+     * Here's you can define your middleware pipeline that every
+     * request from the wopi client will go through.
      */
     'middleware' => [Nagi\LaravelWopi\Http\Middleware\ValidateProof::class],
 
