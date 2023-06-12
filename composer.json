@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "guzzlehttp/guzzle": "^7.4",
-        "illuminate/contracts": "^8.37|^7.0",
+        "illuminate/contracts": "^9.0|^8.37|^7.0",
         "phpseclib/phpseclib": "^2",
         "spatie/laravel-package-tools": "^1.4.3"
     },
