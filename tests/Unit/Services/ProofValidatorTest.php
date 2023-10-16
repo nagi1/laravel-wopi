@@ -49,7 +49,7 @@ it('can verify a request after 20 minutes', function () {
     $result = ProofValidator::isValid(new ProofValidatorInput(
         'test',
         '637706757744700017', // 2021-10-24 12:36:14.0 +00:00
-                'http://localhost',
+        'http://localhost',
         'some-key',
         'some-old-key'
     ));
@@ -58,7 +58,6 @@ it('can verify a request after 20 minutes', function () {
 });
 
 it('can verify X-WOPI-Proof with current discovery proof key', function () {
-
     /** @var TestCase $this */
 
     $wopiHeaderTimeStamp = '635655897610773532';
@@ -87,7 +86,6 @@ it('can verify X-WOPI-Proof with current discovery proof key', function () {
 });
 
 it('can verify X-WOPI-ProofOld with current discovery proof key', function () {
-
     /** @var TestCase $this */
 
     $wopiHeaderTimeStamp = '635655898374047766';
@@ -115,7 +113,6 @@ it('can verify X-WOPI-ProofOld with current discovery proof key', function () {
 });
 
 it('can verify X-WOPI-Proof with old discovery proof key', function () {
-
     /** @var TestCase $this */
 
     $wopiHeaderTimeStamp = '635655898062751632';
@@ -143,7 +140,6 @@ it('can verify X-WOPI-Proof with old discovery proof key', function () {
 });
 
 it('can invalidate proof key', function () {
-
     /** @var TestCase $this */
 
     $wopiHeaderTimeStamp = '635655899260461032';

@@ -19,7 +19,6 @@ interface Shareable
      * @possible-value ReadOnly This type of Share URL allows
      * users to view the file using the URL, but does not
      * give them permission to edit the file.
-     *
      * @possible-value ReadWrite This type of Share URL allows
      * users to both view and edit the file using the URL.
      *
