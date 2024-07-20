@@ -8,7 +8,7 @@ use Nagi\LaravelWopi\Services\ProofValidator as WopiProofValidator;
 /**
  * @method static bool isValid(\Nagi\LaravelWopi\Support\ProofValidatorInput $proofValidatorInput)
  *
- * @see \Nagi\LaravelWopi\Services\ProofValidator
+ * @see WopiProofValidator
  */
 class ProofValidator extends Facade
 {

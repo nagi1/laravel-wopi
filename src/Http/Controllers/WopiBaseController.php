@@ -18,7 +18,7 @@ class WopiBaseController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param string $header
      * @param string|int $value
      *

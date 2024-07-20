@@ -135,7 +135,7 @@ interface WopiInterface
      *
      * @param string $fileId
      * @param string $accessToken
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -148,7 +148,7 @@ interface WopiInterface
      *
      * @param string $fileId
      * @param string $accessToken
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -159,7 +159,7 @@ interface WopiInterface
      *
      * @param string $fileId
      * @param string $accessToken
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -173,7 +173,7 @@ interface WopiInterface
      *
      * @param string $fileId
      * @param string $accessToken
-     * @param \Illuminate\Http\Request $request Contains body has a maximum size of 1024 ASCII characters.
+     * @param Request $request Contains body has a maximum size of 1024 ASCII characters.
      *
      * @return \Illuminate\Http\Response
      */

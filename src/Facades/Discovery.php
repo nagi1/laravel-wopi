@@ -18,7 +18,7 @@ use Nagi\LaravelWopi\Services\Discovery as WopiDiscovery;
  * @method static string getProofModulus()
  * @method static string getOldProofModulus()
  *
- * @see \Nagi\LaravelWopi\Services\Discovery
+ * @see WopiDiscovery
  */
 class Discovery extends Facade
 {
