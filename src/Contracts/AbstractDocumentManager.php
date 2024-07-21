@@ -88,7 +88,7 @@ abstract class AbstractDocumentManager
     /**
      * Preform look up for the file/document.
      *
-     * @param string $fileId unique ID, Represent a single file and URL safe.
+     * @param  string  $fileId  unique ID, Represent a single file and URL safe.
      *
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
@@ -271,29 +271,83 @@ abstract class AbstractDocumentManager
 
     public function getUrlForAction(string $action, string $lang = 'en-US'): string
     {
-        /** @var ConfigRepositoryInterface */
-        $config = app(ConfigRepositoryInterface::class);
-
-        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
-
         $extension = method_exists($this, 'extension')
             ? Str::replaceFirst('.', '', $this->extension())
             : pathinfo($this->basename(), PATHINFO_EXTENSION);
+
+        $actionUrl = optional(Discovery::discoverAction($extension, $action));
 
         $url = route('wopi.checkFileInfo', [
             'file_id' => $this->id(),
         ]);
 
-        // todo handle microsoft office 365 <> placeholders
-        // example https://FFC-onenote.officeapps.live.com/hosting/WopiTestFrame.aspx?<ui=UI_LLCC&><rs=DC_LLCC&><dchat=DISABLE_CHAT&><hid=HOST_SESSION_ID&><sc=SESSION_CONTEXT&><wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&><testcategory=VALIDATOR_TEST_CATEGORY>
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
 
-        $actionUrl = optional(Discovery::discoverAction($extension, $action));
+        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
 
         if (is_null($actionUrl['urlsrc'])) {
             throw new Exception("Unsupported action \"{$action}\" for \"{$extension}\" extension.");
         }
 
+        if (str($actionUrl['urlsrc'])->contains('officeapps.live.com')) {
+            return $this->processMicrosoftOffice365Url($actionUrl['urlsrc'], $url);
+        }
+
         return "{$actionUrl['urlsrc']}lang={$lang}&WOPISrc={$url}";
+    }
+
+    protected function processMicrosoftOffice365Url(string $url, string $wopiSrc): string
+    {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
+
+        $url = str($url);
+
+        // extract all placeholders <PLACEHOLDER_VALUE&> or <PLACEHOLDER_VALUE>
+        // https://excel.officeapps.live.com/x/_layouts/xlviewerinternal.aspx?<ui=UI_LLCC&><rs=DC_LLCC&><dchat=DISABLE_CHAT&><hid=HOST_SESSION_ID&><sc=SESSION_CONTEXT&><wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&><actnavid=ACTIVITY_NAVIGATION_ID&>
+
+        $reqiredReplaceMap = [
+            'UI_LLCC' => $lang,
+            'DC_LLCC' => $lang,
+            'WOPI_SOURCE' => $wopiSrc,
+        ];
+
+        // extract it form the url and remove the required from them
+        $otherReplaceMap = config('wopi.microsoft_365_url_placeholder_value_map', []);
+
+        preg_match_all('/<([^>]*)>/', $url, $matches);
+
+        collect($matches[1])
+        // filter out nulls and falsy values
+            ->filter()
+            ->each(function (string $queryParamWithPlaceholder) use (&$url, &$reqiredReplaceMap, &$otherReplaceMap) {
+
+                foreach ($reqiredReplaceMap as $placeholder => $value) {
+                    if (str($queryParamWithPlaceholder)->contains($placeholder)) {
+                        $url = str($url)->replace($placeholder, $value);
+
+                        return;
+                    }
+                }
+
+                foreach ($otherReplaceMap as $placeholder => $value) {
+                    if (str($queryParamWithPlaceholder)->contains($placeholder)) {
+                        $url = str($url)->replace($placeholder, $value);
+
+                        return;
+                    }
+                }
+
+                // remove the rest of <PLACEHOLDER_VALUE> if not found
+                $url = str($url)->replace('<'.$queryParamWithPlaceholder.'>', '');
+            });
+
+        return $url->replace(['<', '>'], '')
+            ->replaceLast('&', '')
+            ->toString();
     }
 
     /**
@@ -302,15 +356,15 @@ abstract class AbstractDocumentManager
      */
     public function getResponseProprties(): array
     {
-        return  collect(static::$propertyMethodMapping)
-                ->flatMap(function (string $methodName, string $propertyName) {
-                    if (method_exists($this, $methodName)) {
-                        return [
-                             $propertyName => $this->$methodName(),
-                        ];
-                    }
-                })
-                ->filter(fn ($value) => $value !== null)
-                ->toArray();
+        return collect(static::$propertyMethodMapping)
+            ->flatMap(function (string $methodName, string $propertyName) {
+                if (method_exists($this, $methodName)) {
+                    return [
+                        $propertyName => $this->$methodName(),
+                    ];
+                }
+            })
+            ->filter(fn ($value) => $value !== null)
+            ->toArray();
     }
 }
