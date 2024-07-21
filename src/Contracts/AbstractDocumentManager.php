@@ -324,7 +324,6 @@ abstract class AbstractDocumentManager
         // filter out nulls and falsy values
             ->filter()
             ->each(function (string $queryParamWithPlaceholder) use (&$url, &$reqiredReplaceMap, &$otherReplaceMap) {
-
                 foreach ($reqiredReplaceMap as $placeholder => $value) {
                     if (str($queryParamWithPlaceholder)->contains($placeholder)) {
                         $url = str($url)->replace($placeholder, $value);
