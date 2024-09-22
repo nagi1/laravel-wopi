@@ -53,10 +53,16 @@ return [
      */
     'middleware' => [Nagi\LaravelWopi\Http\Middleware\ValidateProof::class],
 
-     /*
+    /*
      * Collabora or Microsoft Office 365 or any WOPI client url.
      */
     'client_url' => env('WOPI_CLIENT_URL', ''),
+
+    /*
+     * WOPI host url override, e.g. in case the WOPI host should be accessed via an internal address instead the
+     * public one.
+     */
+    'host_url' => env('WOPI_HOST_URL', ''),
 
     /*
      * Tells the WOPI client when an access token expires, represented as

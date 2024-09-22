@@ -11,6 +11,11 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
         return '';
     }
 
+    public function getWopiHostUrl(): string
+    {
+        return '';
+    }
+
     public function getDefaultUiLang(): string
     {
         return '';

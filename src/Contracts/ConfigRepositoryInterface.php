@@ -6,6 +6,8 @@ interface ConfigRepositoryInterface
 {
     public function getWopiClientUrl(): string;
 
+    public function getWopiHostUrl(): string;
+
     public function getDefaultUiLang(): string;
 
     public function getDiscoveryXMLConfigFile(): ?string;

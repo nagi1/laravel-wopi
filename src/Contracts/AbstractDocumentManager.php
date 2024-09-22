@@ -5,6 +5,7 @@ namespace Nagi\LaravelWopi\Contracts;
 use Closure;
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\URL;
 use Nagi\LaravelWopi\Contracts\Traits\SupportLocks;
 use Nagi\LaravelWopi\Facades\Discovery;
 
@@ -277,12 +278,19 @@ abstract class AbstractDocumentManager
 
         $actionUrl = optional(Discovery::discoverAction($extension, $action));
 
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        $hasHostOverride = $config->getWopiHostUrl() ? true : false;
+        if ($hasHostOverride) {
+            URL::forceRootUrl($config->getWopiHostUrl());
+        }
         $url = route('wopi.checkFileInfo', [
             'file_id' => $this->id(),
         ]);
-
-        /** @var ConfigRepositoryInterface */
-        $config = app(ConfigRepositoryInterface::class);
+        if ($hasHostOverride) {
+            URL::forceRootUrl(null);
+        }
 
         $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
 
