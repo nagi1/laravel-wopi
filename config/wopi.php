@@ -1,14 +1,14 @@
 <?php
 
 return [
-     /*
+    /*
      * Managing documents differs a lot between apps, because of this reason
      * this configration left empty to be implemented by the user There's
      * plans to implement example storage manager in the future though.
      */
     'document_manager' => null,
 
-     /*
+    /*
      * Default UI langauge.
      */
     'ui_language' => 'en-US',
@@ -29,7 +29,7 @@ return [
      * not have any validation logic. It's a great place to implement
      * custom validation for the access_token and access_token_ttl.
      */
-    'wopi_request' =>  Nagi\LaravelWopi\Http\Requests\WopiRequest::class,
+    'wopi_request' => Nagi\LaravelWopi\Http\Requests\WopiRequest::class,
 
     /*
      * Here's you can define your middleware pipeline that every
@@ -37,7 +37,7 @@ return [
      */
     'middleware' => [Nagi\LaravelWopi\Http\Middleware\ValidateProof::class],
 
-     /*
+    /*
      * Collabora or Microsoft Office 365 or any WOPI client url.
      */
     'client_url' => env('WOPI_CLIENT_URL', ''),
@@ -110,5 +110,10 @@ return [
      * @default false
      */
     'support_user_info' => false,
+
+    /*
+     * @see https://learn.microsoft.com/en-us/microsoft-365/cloud-storage-partner-program/online/discovery#placeholder-values
+     */
+    'microsoft_365_url_placeholder_value_map' => [],
 
 ];
