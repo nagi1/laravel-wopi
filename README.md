@@ -21,7 +21,7 @@ WOPI protocol enables Office for the web to access and change files that are sto
 Supports:
 
 -   [Collabora Office](https://www.collaboraoffice.com/) (Recommended)
--   [Office 365](https://www.office.com/) (in-progress)
+-   [Office 365](https://www.office.com/)
 -   [OnlyOffice](https://www.onlyoffice.com/en/about.aspx)
 
 ## 📕 Documentation
