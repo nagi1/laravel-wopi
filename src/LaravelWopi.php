@@ -8,6 +8,7 @@ use Nagi\LaravelWopi\Contracts\AbstractDocumentManager;
 use Nagi\LaravelWopi\Contracts\Concerns\OverridePermissions;
 use Nagi\LaravelWopi\Contracts\WopiInterface;
 use Throwable;
+use Log;
 
 class LaravelWopi implements WopiInterface
 {
@@ -50,6 +51,7 @@ class LaravelWopi implements WopiInterface
 
         if (! $document->isLocked()) {
             if ($document->size() !== 0) {
+                Log::error("LaravelWopi/putFile: Not locked!");
                 return response('', 409, [WopiInterface::HEADER_ITEM_VERSION => $version]);
             }
         }
@@ -64,6 +66,7 @@ class LaravelWopi implements WopiInterface
             $currentLock = $document->getLock();
 
             if ($lockHeader !== $currentLock) {
+                Log::error("LaravelWopi/putFile: Lock mismatch!");
                 return response('lock mismatch', 409, [
                     WopiInterface::HEADER_LOCK => $currentLock,
                     WopiInterface::HEADER_ITEM_VERSION => $version,
@@ -105,6 +108,7 @@ class LaravelWopi implements WopiInterface
             $currentLock = $document->getLock();
 
             if ($oldLockHeader !== $currentLock) {
+                Log::error("LaravelWopi/lock: Lock mismatch!");
                 return response('', 409, [
                     WopiInterface::HEADER_LOCK => $currentLock,
                     WopiInterface::HEADER_ITEM_VERSION => $version,
@@ -122,6 +126,7 @@ class LaravelWopi implements WopiInterface
                 return $this->refreshLock($fileId, $accessToken, $request);
             }
 
+            Log::error("LaravelWopi/lock: Already locked!");
             return response('', 409, [
                 WopiInterface::HEADER_LOCK => $currentLock,
                 WopiInterface::HEADER_ITEM_VERSION => $version,
@@ -147,6 +152,7 @@ class LaravelWopi implements WopiInterface
 
         // check if the file is locked
         if (! $document->isLocked()) {
+            Log::error("LaravelWopi/unlock: Already unlocked!");
             return response('lock mismatch', 409, [
                 WopiInterface::HEADER_LOCK => '',
             ]);
@@ -156,6 +162,7 @@ class LaravelWopi implements WopiInterface
 
         // compare locks
         if ($currentLock !== $lockHeader) {
+            Log::error("LaravelWopi/unlock: Lock mismatch!");
             return response('', 409, [
                 WopiInterface::HEADER_LOCK => $currentLock,
             ]);
@@ -208,6 +215,7 @@ class LaravelWopi implements WopiInterface
         $document = $documentManager::find($fileId);
 
         if ($document->isLocked()) {
+            Log::error("LaravelWopi/deleteFile: File is locked!");
             return response('', 409, [
                 WopiInterface::HEADER_LOCK =>  $document->getLock(),
             ]);
@@ -238,6 +246,7 @@ class LaravelWopi implements WopiInterface
             $lockHeader = $request->header(WopiInterface::HEADER_LOCK);
 
             if ($lockHeader !== $currentLock) {
+                Log::error("LaravelWopi/renameFile: Lock mismatch!");
                 return response('lock mismatch', 409, [
                     WopiInterface::HEADER_LOCK => $currentLock,
                 ]);
@@ -343,6 +352,7 @@ class LaravelWopi implements WopiInterface
                     // When responding with a 409 Conflict for this reason,
                     // the host may include an X-WOPI-ValidRelativeTarget
                     // specifying a file name that is valid.
+                    Log::error("LaravelWopi/putRelativeFile: Overwriting not allowed!");
                     return response()->json([], 409, [
                         WopiInterface::HEADER_VALID_RELATIVE_TARGET => sprintf('%s.%s', uniqid(), $extension),
                     ]);
@@ -353,6 +363,7 @@ class LaravelWopi implements WopiInterface
                 // locked the host must respond with a 409 Conflict and
                 // include an X-WOPI-Lock response header with lockid.
                 if ($relativeDocument->isLocked()) {
+                    Log::error("LaravelWopi/putRelativeFile: Existing file is locked!");
                     return response()->json([], 409, [
                         WopiInterface::HEADER_LOCK => $relativeDocument->getLock(),
                     ]);
