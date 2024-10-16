@@ -66,7 +66,7 @@ class LaravelWopi implements WopiInterface
             $currentLock = $document->getLock();
 
             if ($lockHeader !== $currentLock) {
-                Log::error("LaravelWopi/putFile: Lock mismatch!");
+                Log::error("LaravelWopi/putFile: Lock mismatch! existing: '{$currentLock}', requested: '{$lockHeader}'");
                 return response('lock mismatch', 409, [
                     WopiInterface::HEADER_LOCK => $currentLock,
                     WopiInterface::HEADER_ITEM_VERSION => $version,
@@ -108,7 +108,7 @@ class LaravelWopi implements WopiInterface
             $currentLock = $document->getLock();
 
             if ($oldLockHeader !== $currentLock) {
-                Log::error("LaravelWopi/lock: Lock mismatch!");
+                Log::error("LaravelWopi/lock: Lock mismatch! existing: '{$currentLock}', requested: '{$lockHeader}'");
                 return response('', 409, [
                     WopiInterface::HEADER_LOCK => $currentLock,
                     WopiInterface::HEADER_ITEM_VERSION => $version,
@@ -162,7 +162,7 @@ class LaravelWopi implements WopiInterface
 
         // compare locks
         if ($currentLock !== $lockHeader) {
-            Log::error("LaravelWopi/unlock: Lock mismatch!");
+            Log::error("LaravelWopi/unlock: Lock mismatch! existing: '{$currentLock}', requested: '{$lockHeader}'");
             return response('', 409, [
                 WopiInterface::HEADER_LOCK => $currentLock,
             ]);
@@ -246,7 +246,7 @@ class LaravelWopi implements WopiInterface
             $lockHeader = $request->header(WopiInterface::HEADER_LOCK);
 
             if ($lockHeader !== $currentLock) {
-                Log::error("LaravelWopi/renameFile: Lock mismatch!");
+                Log::error("LaravelWopi/renameFile: Lock mismatch! existing: '{$currentLock}', requested: '{$lockHeader}'");
                 return response('lock mismatch', 409, [
                     WopiInterface::HEADER_LOCK => $currentLock,
                 ]);
