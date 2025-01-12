@@ -265,9 +265,9 @@ abstract class AbstractDocumentManager
     /**
      * Convenient method for getUrlForAction.
      */
-    public function generateUrl(string $lang = 'en-Us'): string
+    public function generateUrl(string $lang = 'en-Us', string $action = 'edit'): string
     {
-        return $this->getUrlForAction('edit', $lang);
+        return $this->getUrlForAction($action, $lang);
     }
 
     public function getUrlForAction(string $action, string $lang = 'en-US'): string
@@ -276,10 +276,15 @@ abstract class AbstractDocumentManager
             ? Str::replaceFirst('.', '', $this->extension())
             : pathinfo($this->basename(), PATHINFO_EXTENSION);
 
-        $actionUrl = optional(Discovery::discoverAction($extension, $action));
-
         /** @var ConfigRepositoryInterface */
         $config = app(ConfigRepositoryInterface::class);
+
+        if ($config->getEnableInteractiveWopiValidation()) {
+            $action = 'view';
+            $extension = 'wopitest';
+        }
+
+        $actionUrl = optional(Discovery::discoverAction($extension, $action));
 
         $hasHostOverride = $config->getWopiHostUrl() ? true : false;
         if ($hasHostOverride) {
@@ -324,7 +329,7 @@ abstract class AbstractDocumentManager
         ];
 
         // extract it form the url and remove the required from them
-        $otherReplaceMap = config('wopi.microsoft_365_url_placeholder_value_map', []);
+        $otherReplaceMap = $config->getMicrosoft365UrlPlaceholderValueMap();
 
         preg_match_all('/<([^>]*)>/', $url, $matches);
 
@@ -363,7 +368,7 @@ abstract class AbstractDocumentManager
      */
     public function getResponseProprties(): array
     {
-        return collect(static::$propertyMethodMapping)
+        $response = collect(static::$propertyMethodMapping)
             ->flatMap(function (string $methodName, string $propertyName) {
                 if (method_exists($this, $methodName)) {
                     return [
@@ -373,5 +378,15 @@ abstract class AbstractDocumentManager
             })
             ->filter(fn ($value) => $value !== null)
             ->toArray();
+
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+
+        if ($config->getEnableInteractiveWopiValidation()) {
+            $response['BaseFileName'] = 'wopitest.wopitest';
+            $response['FileExtension'] = '.wopitest';
+        }
+
+        return $response;
     }
 }

@@ -90,4 +90,14 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
 
         return $response->body();
     }
+
+    public function getMicrosoft365UrlPlaceholderValueMap(): array
+    {
+        return config('wopi.microsoft_365_url_placeholder_value_map', []);
+    }
+
+    public function getEnableInteractiveWopiValidation(): bool
+    {
+        return config('wopi.enable_interactive_wopi_validation', false);
+    }
 }

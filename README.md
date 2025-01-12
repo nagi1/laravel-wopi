@@ -47,6 +47,13 @@ test Proof-validator `vendor/bin/pest`.
 
 ![testing](media/proof-validtor-test.png)
 
+To enable the [Interactive WOPI Validation](https://learn.microsoft.com/pt-br/microsoft-365/cloud-storage-partner-program/online/build-test-ship/validator), adapt the WOPI configuration:
+
+* client_url: Ensure using Office 365
+* enable_interactive_wopi_validation: Set to `true`
+
+Warning: This will mock any valid file to be the `.wopitest` file, and therefore will be destroyed when running tests.
+
 ## ⚠ Important
 
 This package isn't fully ready to work with Microsoft Office online because it lacks the ability to parse discovery urls. Feel free to Open PR or contact me to work on this togher in case you need it.

@@ -123,4 +123,9 @@ return [
      */
     'microsoft_365_url_placeholder_value_map' => [],
 
+    /*
+     * Enable the interactive WOPI validation.
+     * @see https://learn.microsoft.com/pt-br/microsoft-365/cloud-storage-partner-program/online/build-test-ship/validator
+     */
+    'enable_interactive_wopi_validation' => false,
 ];

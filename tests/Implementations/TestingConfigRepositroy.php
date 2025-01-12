@@ -80,4 +80,14 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
     {
         return 0;
     }
+
+    public function getMicrosoft365UrlPlaceholderValueMap(): array
+    {
+        return [];
+    }
+
+    public function getEnableInteractiveWopiValidation(): bool
+    {
+        return false;
+    }
 }

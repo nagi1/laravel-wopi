@@ -33,4 +33,9 @@ interface ConfigRepositoryInterface
     public function getMiddleware(): array;
 
     public function getDefaultUser(): string;
+
+    public function getMicrosoft365UrlPlaceholderValueMap(): array;
+
+    public function getEnableInteractiveWopiValidation(): bool;
+
 }
