@@ -4,8 +4,8 @@ namespace Nagi\LaravelWopi\Contracts;
 
 use Closure;
 use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use Nagi\LaravelWopi\Contracts\Traits\SupportLocks;
 use Nagi\LaravelWopi\Facades\Discovery;
 
