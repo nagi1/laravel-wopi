@@ -6,6 +6,8 @@ interface ConfigRepositoryInterface
 {
     public function getWopiClientUrl(): string;
 
+    public function getWopiHostUrl(): string;
+
     public function getDefaultUiLang(): string;
 
     public function getDiscoveryXMLConfigFile(): ?string;
@@ -31,4 +33,9 @@ interface ConfigRepositoryInterface
     public function getMiddleware(): array;
 
     public function getDefaultUser(): string;
+
+    public function getMicrosoft365UrlPlaceholderValueMap(): array;
+
+    public function getEnableInteractiveWopiValidation(): bool;
+
 }

@@ -11,6 +11,11 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
         return '';
     }
 
+    public function getWopiHostUrl(): string
+    {
+        return '';
+    }
+
     public function getDefaultUiLang(): string
     {
         return '';
@@ -74,5 +79,15 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
     public function getAccessTokenTTL(): int
     {
         return 0;
+    }
+
+    public function getMicrosoft365UrlPlaceholderValueMap(): array
+    {
+        return [];
+    }
+
+    public function getEnableInteractiveWopiValidation(): bool
+    {
+        return false;
     }
 }
