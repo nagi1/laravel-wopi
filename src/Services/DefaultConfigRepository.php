@@ -59,6 +59,11 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
         return config('wopi.client_url');
     }
 
+    public function getWopiHostUrl(): string
+    {
+        return config('wopi.host_url');
+    }
+
     public function getDefaultUser(): string
     {
         return config('wopi.default_user');
