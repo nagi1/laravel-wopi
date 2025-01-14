@@ -4,6 +4,7 @@ namespace Nagi\LaravelWopi\Http\Controllers;
 
 use Nagi\LaravelWopi\Contracts\WopiInterface;
 use Nagi\LaravelWopi\Http\Requests\WopiRequest;
+use Log;
 
 class WopiPostRequestRouter extends WopiBaseController
 {
@@ -12,7 +13,8 @@ class WopiPostRequestRouter extends WopiBaseController
         // Microsoft used the headers as a second routing layer
         // and even with this second layer the LOCK header is
         // present in 2 request that we also need to handle.
-        switch ($request->header(WopiInterface::HEADER_OVERRIDE)) {
+        $headerOverride = $request->header(WopiInterface::HEADER_OVERRIDE);
+        switch ($headerOverride) {
             case 'LOCK':
                 return $request->hasHeader(WopiInterface::HEADER_OLD_LOCK)
                     ? app(UnlockAndRelockController::class)($request, $fileId, $wopiImplementation)
@@ -33,6 +35,7 @@ class WopiPostRequestRouter extends WopiBaseController
             case 'PUT_USER_INFO': return app(PutUserInfoController::class)($request, $fileId, $wopiImplementation);
                 break;
 
+            Log::error("WopiPostRequestRouter/__invoke: Unhandled header override (X-WOPI-Override): {$headerOverride}");
                 // Anything else is a bad request
             default: return response('', 400);
         }
