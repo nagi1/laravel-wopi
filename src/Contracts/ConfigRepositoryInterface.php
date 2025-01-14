@@ -37,5 +37,4 @@ interface ConfigRepositoryInterface
     public function getMicrosoft365UrlPlaceholderValueMap(): array;
 
     public function getEnableInteractiveWopiValidation(): bool;
-
 }
