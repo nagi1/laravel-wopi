@@ -19,6 +19,8 @@ class LaravelWopi implements WopiInterface
 
         $document = $documentManager::find($fileId);
 
+        $document->setAccessToken($accessToken);
+
         return response()->json($document->getResponseProprties());
     }
 

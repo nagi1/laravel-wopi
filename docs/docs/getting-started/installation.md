@@ -45,7 +45,7 @@ WOPI_CLIENT_URL="https://demo.eu.collaboraonline.com"
 
 Every application has it's own implementation of how it handles documents, It's pretty much impossible to implement one general purpose document manager that fits all usecases. So you **Need** to implement your own `DocumentManager` but don't you worry this package provides a `AbstractDocumentManager` that will ease your task quite a bit.
 
-Take this example implementation from [Laravel wopi example](https://github.com/nagi1/laravel-wopi-example).
+Take this example implementation from [Laravel wopi example](https://github.com/nagi1/wopi-host-example).
 
 - See [Document Manager Section](document-manager#example-document-manager-implementation) for more details about `AbstractDocumentManager`.
 
@@ -126,16 +126,17 @@ For example
 
 ## 5-Retrive your document
 
-Query your document manager to get any [supported Docuemnt](#) like so
+Query your document manager to get any [supported Document](#) like so
 
 ```php
 // In web.php/your controller
 Route::get('/', function (Request $request) {
     $document = app(AbstractDocumentManager::class)::find(1);
 
-    // implementing access tokens is left to you!
+    // Implementing access tokens is left to you!
     $accessToken = 'My_Token';
-    $ttl = 0;
+    // The TTL actually is an expiry, a unix timestamp in milliseconds.
+    $ttl = (time() + 60*60) * 1000;
 
     return view('laravel-wopi-test', [
         'accessToken' => $accessToken,

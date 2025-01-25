@@ -87,6 +87,14 @@ abstract class AbstractDocumentManager
     protected $userId = '';
 
     /**
+     * The access token.
+     * Note: This is not assured to be set {@see \Nagi\LaravelWopi\LaravelWopi}!
+     *
+     * @var string|null
+     */
+    protected $accessToken = null;
+
+    /**
      * Preform look up for the file/document.
      *
      * @param  string  $fileId  unique ID, Represent a single file and URL safe.
@@ -388,5 +396,13 @@ abstract class AbstractDocumentManager
         }
 
         return $response;
+    }
+
+    /**
+     * Just sets the access token.
+     */
+    public function setAccessToken(string $accessToken): void
+    {
+        $this->accessToken = $accessToken;
     }
 }
