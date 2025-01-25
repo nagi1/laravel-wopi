@@ -83,6 +83,8 @@ class DBDocumentManager extends AbstractDocumentManager
     public function userFriendlyName(): string
     {
         $user = Auth::user();
+        
+        // You can also use `$this->accessToken` to resolve the username using the access token.
 
         return is_null($user) ? 'Guest' : $user->name;
     }
