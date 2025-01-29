@@ -273,12 +273,16 @@ abstract class AbstractDocumentManager
     /**
      * Convenient method for getUrlForAction.
      */
-    public function generateUrl(string $lang = 'en-Us', string $action = 'edit'): string
+    public function generateUrl(string $lang = null, string $action = 'edit'): string
     {
+        /** @var ConfigRepositoryInterface */
+        $config = app(ConfigRepositoryInterface::class);
+        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
+
         return $this->getUrlForAction($action, $lang);
     }
 
-    public function getUrlForAction(string $action, string $lang = 'en-US'): string
+    public function getUrlForAction(string $action, string $lang): string
     {
         $extension = method_exists($this, 'extension')
             ? Str::replaceFirst('.', '', $this->extension())
@@ -305,25 +309,21 @@ abstract class AbstractDocumentManager
             URL::forceRootUrl(null);
         }
 
-        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
-
         if (is_null($actionUrl['urlsrc'])) {
             throw new Exception("Unsupported action \"{$action}\" for \"{$extension}\" extension.");
         }
 
         if (str($actionUrl['urlsrc'])->contains('officeapps.live.com')) {
-            return $this->processMicrosoftOffice365Url($actionUrl['urlsrc'], $url);
+            return $this->processMicrosoftOffice365Url($actionUrl['urlsrc'], $url, $lang);
         }
 
         return "{$actionUrl['urlsrc']}lang={$lang}&WOPISrc={$url}";
     }
 
-    protected function processMicrosoftOffice365Url(string $url, string $wopiSrc): string
+    protected function processMicrosoftOffice365Url(string $url, string $wopiSrc, string $lang): string
     {
         /** @var ConfigRepositoryInterface */
         $config = app(ConfigRepositoryInterface::class);
-
-        $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
 
         $url = str($url);
 
