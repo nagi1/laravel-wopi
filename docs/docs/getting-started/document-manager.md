@@ -565,6 +565,10 @@ One of the most important methods on the Document Manager, responsible for const
 
 ```
 
+## Breadcrumbs
+
+For providing breadcrumbs, which might be supported by the WOPI client, implement the `HasBreadcrumbs` interface.
+
 ### Actions
 
 Todo from the docs

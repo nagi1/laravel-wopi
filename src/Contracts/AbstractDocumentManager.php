@@ -77,6 +77,13 @@ abstract class AbstractDocumentManager
         'SupportsRename' => 'supportRename',
         'SupportsExtendedLockLength' => 'supportExtendedLockLength',
 
+        // Breadcrumbs
+        'BreadcrumbBrandName' => 'breadcrumbBrandName',
+        'BreadcrumbBrandUrl' => 'breadcrumbBrandUrl',
+        'BreadcrumbDocName' => 'breadcrumbDocName',
+        'BreadcrumbFolderName' => 'breadcrumbFolderName',
+        'BreadcrumbFolderUrl' => 'breadcrumbFolderUrl',
+
     ];
 
     /**
