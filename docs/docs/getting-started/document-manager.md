@@ -126,7 +126,7 @@ class DBDocumentManager extends AbstractDocumentManager
 
     public function put(string $content, array $editorsIds = []): void
     {
-        // calculate content size and hash, be carefull with large contents!
+        // calculate content size and hash, be careful with large contents!
         $size = strlen($content);
         $hash = base64_encode(hash('sha256', $content, true));
         $newVersion = uniqid();
@@ -238,7 +238,7 @@ class DBDocumentManager extends AbstractDocumentManager implements Renameable
 Support hashes.
 
 :::caution
-Be extra carefull when calculating hashes for large contnet!
+Be extra careful when calculating hashes for large content!
 :::
 
 Implement `HasHash` interface
