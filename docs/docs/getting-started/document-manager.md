@@ -128,7 +128,7 @@ class DBDocumentManager extends AbstractDocumentManager
     {
         // calculate content size and hash, be carefull with large contents!
         $size = strlen($content);
-        $hash = hash('sha256', base64_encode($content));
+        $hash = base64_encode(hash('sha256', $content, true));
         $newVersion = uniqid();
 
         file_put_contents(Storage::disk('public')->path($this->file->path), $content);
