@@ -124,7 +124,7 @@ For example
 
 ```
 
-## 5-Retrive your document
+## 5-Retrieve your document
 
 Query your document manager to get any [supported Document](#) like so
 
@@ -146,6 +146,13 @@ Route::get('/', function (Request $request) {
 });
 
 ```
+
+## 6-Protect access
+
+To ensure only authorized requests can be made to the laravel-wopi endpoints, use one of the following approaches:
+
+* Register auth middleware in the [configuration](configuration.md).
+* Check permissions in the [Document Manager](document-manager.md) manually.
 
 Open your application and voalla!
 
