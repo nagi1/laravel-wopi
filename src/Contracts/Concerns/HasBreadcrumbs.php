@@ -24,7 +24,7 @@ interface HasBreadcrumbs
     public function breadcrumbDocName(): string;
 
     /**
-     * The name of the folder URL
+     * The name of the folder URL.
      */
     public function breadcrumbFolderName(): string;
 
