@@ -100,4 +100,9 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
     {
         return config('wopi.enable_interactive_wopi_validation', false);
     }
+
+    public function isMicrosoft365Enabled(): bool
+    {
+        return str_contains($this->getWopiClientUrl(), 'officeapps.live.com');
+    }
 }

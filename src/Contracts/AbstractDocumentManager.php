@@ -286,10 +286,10 @@ abstract class AbstractDocumentManager
         $config = app(ConfigRepositoryInterface::class);
         $lang = empty($lang) ? $config->getDefaultUiLang() : $lang;
 
-        return $this->getUrlForAction($action, $lang);
+        return $this->getUrlForAction($action, $lang, $config->isMicrosoft365Enabled());
     }
 
-    public function getUrlForAction(string $action, string $lang): string
+    public function getUrlForAction(string $action, string $lang, bool $isMicrosoft365Enabled): string
     {
         $extension = method_exists($this, 'extension')
             ? Str::replaceFirst('.', '', $this->extension())
@@ -320,7 +320,7 @@ abstract class AbstractDocumentManager
             throw new Exception("Unsupported action \"{$action}\" for \"{$extension}\" extension.");
         }
 
-        if (str($actionUrl['urlsrc'])->contains('officeapps.live.com')) {
+        if ($isMicrosoft365Enabled) {
             return $this->processMicrosoftOffice365Url($actionUrl['urlsrc'], $url, $lang);
         }
 

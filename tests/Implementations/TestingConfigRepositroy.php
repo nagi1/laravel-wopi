@@ -90,4 +90,9 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
     {
         return false;
     }
+
+    public function isMicrosoft365Enabled(): bool
+    {
+        return false;
+    }
 }

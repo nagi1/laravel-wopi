@@ -13,13 +13,20 @@ class ValidateProof
     public function handle(Request $request, Closure $next)
     {
         // Be carefull with database based config!
-        $isproofValidationEnabled = app(ConfigRepositoryInterface::class)->getEnableProofValidation();
+        $config = app(ConfigRepositoryInterface::class);
+        $isProofValidationEnabled = $config->getEnableProofValidation();
 
-        if (! $isproofValidationEnabled) {
+        if (! $isProofValidationEnabled) {
             return $next($request);
         }
 
-        if (ProofValidator::isValid(ProofValidatorInput::fromRequest($request))) {
+        $proofValidatorInput = ProofValidatorInput::fromRequest($request);
+
+        if ($config->isMicrosoft365Enabled()) {
+            $proofValidatorInput->accessToken = urldecode($proofValidatorInput->accessToken);
+        }
+
+        if (ProofValidator::isValid($proofValidatorInput)) {
             return $next($request);
         }
 
