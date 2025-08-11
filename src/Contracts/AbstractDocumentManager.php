@@ -6,6 +6,7 @@ use Closure;
 use Exception;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Nagi\LaravelWopi\Contracts\Concerns\SupportBusinessUser;
 use Nagi\LaravelWopi\Contracts\Traits\SupportLocks;
 use Nagi\LaravelWopi\Facades\Discovery;
 
@@ -84,6 +85,9 @@ abstract class AbstractDocumentManager
         'BreadcrumbFolderName' => 'breadcrumbFolderName',
         'BreadcrumbFolderUrl' => 'breadcrumbFolderUrl',
 
+        // Business user
+        'LicenseCheckForEditIsEnabled' => 'licenseCheckForEditIsEnabled',
+        'HostEditUrl' => 'hostEditUrl',
     ];
 
     /**
@@ -337,11 +341,15 @@ abstract class AbstractDocumentManager
         // extract all placeholders <PLACEHOLDER_VALUE&> or <PLACEHOLDER_VALUE>
         // https://excel.officeapps.live.com/x/_layouts/xlviewerinternal.aspx?<ui=UI_LLCC&><rs=DC_LLCC&><dchat=DISABLE_CHAT&><hid=HOST_SESSION_ID&><sc=SESSION_CONTEXT&><wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&><actnavid=ACTIVITY_NAVIGATION_ID&>
 
-        $reqiredReplaceMap = [
+        $requiredReplaceMap = [
             'UI_LLCC' => $lang,
             'DC_LLCC' => $lang,
             'WOPI_SOURCE' => $wopiSrc,
         ];
+
+        if ($this instanceof SupportBusinessUser) {
+            $requiredReplaceMap['BUSINESS_USER'] = $this->licenseCheckForEditIsEnabled() ? 1 : 0;
+        }
 
         // extract it form the url and remove the required from them
         $otherReplaceMap = $config->getMicrosoft365UrlPlaceholderValueMap();
@@ -351,8 +359,8 @@ abstract class AbstractDocumentManager
         collect($matches[1])
         // filter out nulls and falsy values
             ->filter()
-            ->each(function (string $queryParamWithPlaceholder) use (&$url, &$reqiredReplaceMap, &$otherReplaceMap) {
-                foreach ($reqiredReplaceMap as $placeholder => $value) {
+            ->each(function (string $queryParamWithPlaceholder) use (&$url, &$requiredReplaceMap, &$otherReplaceMap) {
+                foreach ($requiredReplaceMap as $placeholder => $value) {
                     if (str($queryParamWithPlaceholder)->contains($placeholder)) {
                         $url = str($url)->replace($placeholder, $value);
 
