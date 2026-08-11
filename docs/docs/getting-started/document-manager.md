@@ -565,6 +565,26 @@ One of the most important methods on the Document Manager, responsible for const
 
 ```
 
+The url is never assembled from configuration, it comes from the `urlsrc`
+the client advertises in its discovery document for the extension and the
+action. Templates look like this:
+
+```
+https://ds.example.com/hosting/wopi/word/edit?<ui=UI_LLCC&><wopisrc=WOPI_SOURCE&><hid=HOST_SESSION_ID&>
+```
+
+`buildActionUrl` resolves those placeholder groups: the language and the
+wopi source are filled in, the ones listed in
+`microsoft_365_url_placeholder_value_map` are taken from configuration and
+the remaining groups get dropped. `WOPISrc` gets appended for clients that
+advertise no placeholder for it, encoded exactly once.
+
+:::caution
+Clients move their action urls between versions. When editing breaks right
+after upgrading the client, the cached discovery document is the first
+thing to clear: `php artisan wopi:clear-discovery`.
+:::
+
 ## Breadcrumbs
 
 For providing breadcrumbs, which might be supported by the WOPI client, implement the `HasBreadcrumbs` interface.

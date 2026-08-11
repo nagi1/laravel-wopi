@@ -76,6 +76,16 @@ class TestingConfigRepositroy implements ConfigRepositoryInterface
         return file_get_contents(__DIR__.'/../Unit/Services/discovery.xml');
     }
 
+    public function getDiscoveryCacheTtl(): int
+    {
+        return 3600;
+    }
+
+    public function getDiscoveryCacheStore(): ?string
+    {
+        return 'array';
+    }
+
     public function getAccessTokenTTL(): int
     {
         return 0;

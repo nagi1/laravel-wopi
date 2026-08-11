@@ -7,6 +7,8 @@ use Nagi\LaravelWopi\Services\Discovery as WopiDiscovery;
 
 /**
  * @method static \SimpleXMLElement discover(string $rawXmlString)
+ * @method static \SimpleXMLElement document()
+ * @method static void forget()
  * @method static null|array discoverAction(string $extension, string $name = 'view')
  * @method static array discoverExtension(string $extension)
  * @method static array discoverMimeType(string $mimeType)

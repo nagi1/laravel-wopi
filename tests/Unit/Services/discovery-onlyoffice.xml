@@ -1,0 +1,13 @@
+<wopi-discovery>
+    <net-zone name="external-https">
+
+        <app favIconUrl="https://ds.example.com/web-apps/apps/documenteditor/main/resources/img/favicon.ico" name="Word">
+            <action default="true" ext="docx" name="edit" urlsrc="https://ds.example.com/hosting/wopi/word/edit?&lt;wopisrc=WOPI_SOURCE&amp;&gt;&lt;ui=UI_LLCC&amp;&gt;&lt;hid=HOST_SESSION_ID&amp;&gt;"/>
+            <action default="true" ext="docx" name="view" urlsrc="https://ds.example.com/hosting/wopi/word/view?&lt;wopisrc=WOPI_SOURCE&amp;&gt;"/>
+            <action default="true" ext="docx" name="convert" requires="update" urlsrc="https://ds.example.com/hosting/wopi/convert-to/docx?&lt;wopisrc=WOPI_SOURCE&amp;&gt;"/>
+        </app>
+
+    </net-zone>
+
+    <proof-key exponent="AQAB" modulus="modulus_value" oldexponent="AQAB" oldmodulus="old_modulus_value" oldvalue="old_public_key" value="public_key"/>
+</wopi-discovery>

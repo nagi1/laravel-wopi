@@ -12,6 +12,16 @@ interface ConfigRepositoryInterface
 
     public function getDiscoveryXMLConfigFile(): ?string;
 
+    /**
+     * Seconds the discovery document stays cached, 0 disables caching.
+     */
+    public function getDiscoveryCacheTtl(): int;
+
+    /**
+     * Cache store for the discovery document, null uses the default store.
+     */
+    public function getDiscoveryCacheStore(): ?string;
+
     public function getAccessTokenTTL(): int;
 
     public function getEnableProofValidation(): bool;

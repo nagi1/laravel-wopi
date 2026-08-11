@@ -2,6 +2,7 @@
 
 namespace Nagi\LaravelWopi;
 
+use Nagi\LaravelWopi\Commands\ClearDiscoveryCacheCommand;
 use Nagi\LaravelWopi\Contracts\AbstractDocumentManager;
 use Nagi\LaravelWopi\Contracts\ConfigRepositoryInterface;
 use Nagi\LaravelWopi\Contracts\WopiInterface;
@@ -36,6 +37,7 @@ class LaravelWopiServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-wopi')
             ->hasRoute('wopi')
-            ->hasConfigFile();
+            ->hasConfigFile()
+            ->hasCommand(ClearDiscoveryCacheCommand::class);
     }
 }

@@ -324,65 +324,97 @@ abstract class AbstractDocumentManager
             throw new Exception("Unsupported action \"{$action}\" for \"{$extension}\" extension.");
         }
 
+        $urlsrc = (string) $actionUrl['urlsrc'];
+
+        // Kept as a separate entry point so existing overrides of it keep
+        // being applied, both branches build the url the same way.
         if ($isMicrosoft365Enabled) {
-            return $this->processMicrosoftOffice365Url($actionUrl['urlsrc'], $url, $lang);
+            return $this->processMicrosoftOffice365Url($urlsrc, $url, $lang);
         }
 
-        return "{$actionUrl['urlsrc']}lang={$lang}&WOPISrc={$url}";
+        return $this->buildActionUrl($urlsrc, $url, $lang);
     }
 
-    protected function processMicrosoftOffice365Url(string $url, string $wopiSrc, string $lang): string
+    /**
+     * Turn the "urlsrc" template advertised by the discovery document into
+     * the url the browser gets pointed at: fill in the placeholder groups
+     * we can supply, drop the ones we can't and append what is missing.
+     *
+     * Templates look like this, the trailing groups being optional:
+     * https://excel.officeapps.live.com/x/_layouts/xlviewerinternal.aspx?<ui=UI_LLCC&><rs=DC_LLCC&><dchat=DISABLE_CHAT&><hid=HOST_SESSION_ID&><sc=SESSION_CONTEXT&><wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&><actnavid=ACTIVITY_NAVIGATION_ID&>
+     */
+    protected function buildActionUrl(string $urlsrc, string $wopiSrc, string $lang): string
     {
         /** @var ConfigRepositoryInterface */
         $config = app(ConfigRepositoryInterface::class);
 
-        $url = str($url);
-
-        // extract all placeholders <PLACEHOLDER_VALUE&> or <PLACEHOLDER_VALUE>
-        // https://excel.officeapps.live.com/x/_layouts/xlviewerinternal.aspx?<ui=UI_LLCC&><rs=DC_LLCC&><dchat=DISABLE_CHAT&><hid=HOST_SESSION_ID&><sc=SESSION_CONTEXT&><wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&><actnavid=ACTIVITY_NAVIGATION_ID&>
+        // The wopi source has to be encoded exactly once.
+        $encodedWopiSrc = rawurlencode($wopiSrc);
 
         $requiredReplaceMap = [
             'UI_LLCC' => $lang,
             'DC_LLCC' => $lang,
-            'WOPI_SOURCE' => $wopiSrc,
+            'WOPI_SOURCE' => $encodedWopiSrc,
         ];
 
         if ($this instanceof SupportBusinessUser) {
             $requiredReplaceMap['BUSINESS_USER'] = $this->licenseCheckForEditIsEnabled() ? 1 : 0;
         }
 
-        // extract it form the url and remove the required from them
-        $otherReplaceMap = $config->getMicrosoft365UrlPlaceholderValueMap();
+        // The required placeholders take precedence over the configured ones.
+        $replaceMap = array_merge($config->getMicrosoft365UrlPlaceholderValueMap(), $requiredReplaceMap);
 
-        preg_match_all('/<([^>]*)>/', $url, $matches);
+        $resolved = [];
 
-        collect($matches[1])
-        // filter out nulls and falsy values
-            ->filter()
-            ->each(function (string $queryParamWithPlaceholder) use (&$url, &$requiredReplaceMap, &$otherReplaceMap) {
-                foreach ($requiredReplaceMap as $placeholder => $value) {
-                    if (str($queryParamWithPlaceholder)->contains($placeholder)) {
-                        $url = str($url)->replace($placeholder, $value);
+        $url = preg_replace_callback('/<([^>]*)>/', function (array $matches) use ($replaceMap, &$resolved) {
+            $queryParamWithPlaceholder = $matches[1];
 
-                        return;
-                    }
+            foreach ($replaceMap as $placeholder => $value) {
+                if (! str_contains($queryParamWithPlaceholder, (string) $placeholder)) {
+                    continue;
                 }
 
-                foreach ($otherReplaceMap as $placeholder => $value) {
-                    if (str($queryParamWithPlaceholder)->contains($placeholder)) {
-                        $url = str($url)->replace($placeholder, $value);
-
-                        return;
-                    }
+                if ((string) $value === '') {
+                    return '';
                 }
 
-                // remove the rest of <PLACEHOLDER_VALUE> if not found
-                $url = str($url)->replace('<'.$queryParamWithPlaceholder.'>', '');
-            });
+                $resolved[$placeholder] = true;
 
-        return $url->replace(['<', '>'], '')
-            ->replaceLast('&', '')
-            ->toString();
+                return str_replace((string) $placeholder, (string) $value, $queryParamWithPlaceholder);
+            }
+
+            // Nothing to supply for this one, e.g. <hid=HOST_SESSION_ID&>.
+            return '';
+        }, $urlsrc);
+
+        $url = rtrim((string) $url, '&?');
+
+        $query = [];
+
+        // Clients that don't advertise a language placeholder still
+        // understand the plain "lang" query parameter.
+        if ($lang !== '' && ! isset($resolved['UI_LLCC']) && ! isset($resolved['DC_LLCC'])) {
+            $query[] = 'lang='.rawurlencode($lang);
+        }
+
+        if (! isset($resolved['WOPI_SOURCE'])) {
+            $query[] = 'WOPISrc='.$encodedWopiSrc;
+        }
+
+        if (empty($query)) {
+            return $url;
+        }
+
+        return $url.(str_contains($url, '?') ? '&' : '?').implode('&', $query);
+    }
+
+    /**
+     * Placeholders are resolved for every client now, this only remains
+     * as an override point for hosts that replaced it.
+     */
+    protected function processMicrosoftOffice365Url(string $url, string $wopiSrc, string $lang): string
+    {
+        return $this->buildActionUrl($url, $wopiSrc, $lang);
     }
 
     /**

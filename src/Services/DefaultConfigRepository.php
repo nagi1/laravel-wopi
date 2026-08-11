@@ -82,13 +82,30 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
     public function getDiscoveryXMLConfigFile(): ?string
     {
         $url = "{$this->getWopiClientUrl()}/hosting/discovery";
-        $response = Http::get($url);
 
-        if ($response->status() !== 200) {
+        // Clients commonly redirect http to https, and the body of such a
+        // response is html which would blow up while parsing the xml.
+        $response = Http::withOptions(['allow_redirects' => true])
+            ->timeout(10)
+            ->get($url);
+
+        if (! $response->successful()) {
             throw new Exception("Could not reach to the configuration discovery.xml file from {$url}.");
         }
 
         return $response->body();
+    }
+
+    public function getDiscoveryCacheTtl(): int
+    {
+        return (int) config('wopi.discovery_cache_ttl', 0);
+    }
+
+    public function getDiscoveryCacheStore(): ?string
+    {
+        $store = config('wopi.discovery_cache_store');
+
+        return empty($store) ? null : (string) $store;
     }
 
     public function getMicrosoft365UrlPlaceholderValueMap(): array
