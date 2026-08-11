@@ -90,7 +90,7 @@ class DefaultConfigRepository implements ConfigRepositoryInterface
             ->get($url);
 
         if (! $response->successful()) {
-            throw new Exception("Could not reach to the configuration discovery.xml file from {$url}.");
+            throw new Exception("Could not reach the discovery.xml file at {$url}.");
         }
 
         return $response->body();
