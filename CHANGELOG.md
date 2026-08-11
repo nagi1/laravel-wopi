@@ -4,6 +4,14 @@ All notable changes to `laravel-wopi` will be documented in this file.
 
 ## Unreleased
 
+- Look the `access_token` up by name anywhere in the query string. It used to be
+  matched only directly after the `?`, so any parameter a client put in front of
+  it made the token come out empty.
+- Accept the token from an `Authorization: Bearer` header as well, which is what
+  clients send with `wopi.sendAuthorizationHeader` enabled.
+- `ProofValidatorInput` properties are nullable. A request without a token or
+  proof headers used to raise a `TypeError` instead of failing validation.
+
 - Resolve the `<PLACEHOLDER&>` groups of the advertised `urlsrc` for every wopi
   client instead of Office 365 only. Clients such as newer OnlyOffice document
   server builds advertise `<wopisrc=WOPI_SOURCE&>`, which used to be passed to

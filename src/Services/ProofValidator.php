@@ -33,6 +33,13 @@ class ProofValidator
             return false;
         }
 
+        // Without a token there is nothing to build the expected proof from.
+        if (empty($this->proofValidatorInput->accessToken) || empty($this->proofValidatorInput->url)) {
+            Log::error('ProofValidator: The request carries no access token!');
+
+            return false;
+        }
+
         // Making sure that timestamp header was sent within the last 20 minutes.
         if (! $this->verifyTimestamp()) {
             Log::error('ProofValidator: Timestamp is not valid!');

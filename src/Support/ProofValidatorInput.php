@@ -7,15 +7,19 @@ use Nagi\LaravelWopi\Contracts\WopiInterface;
 
 class ProofValidatorInput
 {
-    public string $accessToken;
+    /**
+     * Every value is nullable, a request that is missing one of them can
+     * not be validated but must not blow up on the way there either.
+     */
+    public ?string $accessToken;
 
-    public string $timestamp;
+    public ?string $timestamp;
 
-    public string $url;
+    public ?string $url;
 
-    public string $proof;
+    public ?string $proof;
 
-    public string $oldProof;
+    public ?string $oldProof;
 
     public function __construct(
         ?string $accessToken,
@@ -36,7 +40,7 @@ class ProofValidatorInput
     public static function fromRequest(Request $request): self
     {
         $url = RequestHelper::parseUrl($request);
-        $accessToken = RequestHelper::getAccessTokenFromUrl($url);
+        $accessToken = RequestHelper::parseAccessToken($request);
         $timestamp = $request->header(WopiInterface::HEADER_TIMESTAMP);
         $proofHeader = $request->header(WopiInterface::HEADER_PROOF);
         $oldProofHeader = $request->header(WopiInterface::HEADER_PROOF_OLD);

@@ -20,22 +20,62 @@ class RequestHelper
     }
 
     /**
-     * Alias for getAccessTokenFromUrl.
+     * The access token of the request, either from the query string or
+     * from the authorization header, whichever the client used.
      */
     public static function parseAccessToken(Request $request): ?string
     {
         $url = static::parseUrl($request);
 
-        return static::getAccessTokenFromUrl($url);
+        return static::getAccessTokenFromUrl($url)
+            ?? static::getAccessTokenFromHeader($request);
     }
 
     /**
-     * Extract only access_token from url.
+     * Extract only access_token from url. Clients are free to order their
+     * query parameters as they like, so the token is looked up by name
+     * rather than expected in a fixed position.
      */
-    public static function getAccessTokenFromUrl(string $url): ?string
+    public static function getAccessTokenFromUrl(?string $url): ?string
     {
-        preg_match("/\?access_token=\K[^&]+/", $url, $matches);
+        if (empty($url)) {
+            return null;
+        }
 
-        return optional($matches)[0];
+        $separator = strpos($url, '?');
+
+        if ($separator === false) {
+            return null;
+        }
+
+        // Values are deliberately not decoded, the proof validation has to
+        // hash the token exactly as the client sent it.
+        foreach (explode('&', substr($url, $separator + 1)) as $queryParam) {
+            if (! str_starts_with($queryParam, 'access_token=')) {
+                continue;
+            }
+
+            $accessToken = substr($queryParam, strlen('access_token='));
+
+            return $accessToken === '' ? null : $accessToken;
+        }
+
+        return null;
+    }
+
+    /**
+     * Extract the access token from the authorization header, which is what
+     * clients send instead of the query parameter when they are told to,
+     * e.g. `wopi.sendAuthorizationHeader` on OnlyOffice document server.
+     */
+    public static function getAccessTokenFromHeader(Request $request): ?string
+    {
+        $authorization = (string) $request->header('Authorization');
+
+        if (! preg_match('/^\s*Bearer\s+(\S+)\s*$/i', $authorization, $matches)) {
+            return null;
+        }
+
+        return $matches[1];
     }
 }

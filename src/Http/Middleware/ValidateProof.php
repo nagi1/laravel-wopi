@@ -22,7 +22,7 @@ class ValidateProof
 
         $proofValidatorInput = ProofValidatorInput::fromRequest($request);
 
-        if ($config->isMicrosoft365Enabled()) {
+        if ($config->isMicrosoft365Enabled() && $proofValidatorInput->accessToken !== null) {
             $proofValidatorInput->accessToken = urldecode($proofValidatorInput->accessToken);
         }
 
