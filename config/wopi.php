@@ -50,6 +50,20 @@ return [
     'host_url' => env('WOPI_HOST_URL', ''),
 
     /*
+     * Seconds the discovery document of the client gets cached for, set
+     * to 0 to fetch it on every request. Clients move their action
+     * urls between versions, so clear the cache after upgrading
+     * the client: `php artisan wopi:clear-discovery`.
+     */
+    'discovery_cache_ttl' => env('WOPI_DISCOVERY_CACHE_TTL', 12 * 60 * 60),
+
+    /*
+     * Cache store used for the discovery document.
+     * Leave empty to use the default store.
+     */
+    'discovery_cache_store' => env('WOPI_DISCOVERY_CACHE_STORE'),
+
+    /*
      * Tells the WOPI client when an access token expires, represented as
      * a timestamp. It's not a duration rather than a date of expiry.
      */

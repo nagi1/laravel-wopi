@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Nagi\LaravelWopi\Support\RequestHelper;
 
 class WopiBaseController extends Controller
 {
@@ -14,7 +15,7 @@ class WopiBaseController extends Controller
 
     public function hasAccessToken(Request $request): bool
     {
-        return ! empty($request->query('access_token'));
+        return ! empty(RequestHelper::parseAccessToken($request));
     }
 
     /**

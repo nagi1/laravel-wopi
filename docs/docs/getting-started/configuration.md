@@ -65,6 +65,20 @@ return [
     'host_url' => env('WOPI_HOST_URL', ''),
 
     /*
+     * Seconds the discovery document of the client gets cached for, set
+     * to 0 to fetch it on every request. Clients move their action
+     * urls between versions, so clear the cache after upgrading
+     * the client: `php artisan wopi:clear-discovery`.
+     */
+    'discovery_cache_ttl' => env('WOPI_DISCOVERY_CACHE_TTL', 12 * 60 * 60),
+
+    /*
+     * Cache store used for the discovery document.
+     * Leave empty to use the default store.
+     */
+    'discovery_cache_store' => env('WOPI_DISCOVERY_CACHE_STORE'),
+
+    /*
      * Tells the WOPI client when an access token expires, represented as
      * a timestamp. It's not a duration rather than a date of expiry.
      */
@@ -174,13 +188,39 @@ Or customize how would you like to get `discovery.xml` file
     public function getDiscoveryXMLConfigFile(): ?string
     {
         $url = "{$this->getWopiClientUrl()}/hosting/discovery";
-        $response = Http::get($url);
 
-        if ($response->status() !== 200) {
+        $response = Http::withOptions(['allow_redirects' => true])
+            ->timeout(10)
+            ->get($url);
+
+        if (! $response->successful()) {
             throw new Exception("Could not reach to the configuration discovery.xml file from {$url}");
         }
 
         return $response->body();
+    }
+
+```
+
+:::caution
+Request the discovery document over `https` when the client redirects to it.
+The body of a redirect response is html, and parsing it as the discovery
+document fails.
+:::
+
+The document is only fetched when it is not cached, `getDiscoveryCacheTtl`
+and `getDiscoveryCacheStore` decide for how long and where.
+
+```php
+
+    public function getDiscoveryCacheTtl(): int
+    {
+        return 12 * 60 * 60;
+    }
+
+    public function getDiscoveryCacheStore(): ?string
+    {
+        return null; // default store
     }
 
 ```

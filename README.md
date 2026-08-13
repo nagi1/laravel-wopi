@@ -56,7 +56,14 @@ Warning: This will mock any valid file to be the `.wopitest` file, and therefore
 
 ## ⚠ Important
 
-This package isn't fully ready to work with Microsoft Office online because it lacks the ability to parse discovery urls. Feel free to Open PR or contact me to work on this togher in case you need it.
+Editor urls come from the discovery document of the client (`/hosting/discovery`),
+including the placeholder groups such as `<wopisrc=WOPI_SOURCE&>`. The document is
+cached, so clear it whenever the client gets upgraded, otherwise the browser is
+handed action urls that no longer exist:
+
+```bash
+php artisan wopi:clear-discovery
+```
 
 ## Credits
 

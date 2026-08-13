@@ -8,6 +8,7 @@ use Nagi\LaravelWopi\Support\DotNetTimeConverter;
 use Nagi\LaravelWopi\Support\ProofValidatorInput;
 use phpseclib\Crypt\RSA;
 use phpseclib\Math\BigInteger;
+use Log;
 
 /**
  * Proof if an inbound WOPI HTTP request is genuine or malicious.
@@ -28,11 +29,20 @@ class ProofValidator
 
         // Check if X-WOPI-PROOF header is present
         if (! $this->proofHeadersArePresent()) {
+            Log::error('ProofValidator: Proof headers are not present!');
+            return false;
+        }
+
+        // Without a token there is nothing to build the expected proof from.
+        if (empty($this->proofValidatorInput->accessToken) || empty($this->proofValidatorInput->url)) {
+            Log::error('ProofValidator: The request carries no access token!');
+
             return false;
         }
 
         // Making sure that timestamp header was sent within the last 20 minutes.
         if (! $this->verifyTimestamp()) {
+            Log::error('ProofValidator: Timestamp is not valid!');
             return false;
         }
 
@@ -187,12 +197,22 @@ class ProofValidator
         $rsa = new RSA();
 
         if (! $rsa->loadKey($key)) {
+            Log::error('ProofValidator: Unable to load key!');
+            return false;
+        }
+
+        if (empty($expected)) {
+            Log::error('ProofValidator: Expected key not set!');
             return false;
         }
 
         $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);
         $rsa->setHash('sha256');
 
-        return $rsa->verify($expected, (string) base64_decode($signedProof, true));
+        $isValid = $rsa->verify($expected, (string) base64_decode($signedProof, true));
+        if (! $isValid) {
+            Log::error('ProofValidator: Proof is not valid!');
+        }
+        return $isValid;
     }
 }
