@@ -97,8 +97,7 @@ it('never hands a placeholder group to the client', function () {
 it('builds the same url through the microsoft 365 entry point', function () {
     /** @var TestCase $this */
 
-    app()->instance(ConfigRepositoryInterface::class, new class extends TestingConfigRepositroy
-    {
+    app()->instance(ConfigRepositoryInterface::class, new class extends TestingConfigRepositroy {
         public function isMicrosoft365Enabled(): bool
         {
             return true;
@@ -118,8 +117,7 @@ it('resolves the business user placeholder', function () {
         ->with('docx', 'edit')
         ->andReturn(['urlsrc' => 'https://excel.officeapps.live.com/x/_layouts/xlviewerinternal.aspx?<wopisrc=WOPI_SOURCE&><IsLicensedUser=BUSINESS_USER&>']);
 
-    $document = new class extends TestingDocumentManager implements SupportBusinessUser
-    {
+    $document = new class extends TestingDocumentManager implements SupportBusinessUser {
         public bool $licensed = true;
 
         public function licenseCheckForEditIsEnabled(): bool
@@ -146,8 +144,7 @@ it('resolves the business user placeholder', function () {
 it('builds the url from the discovery document the client serves', function () {
     /** @var TestCase $this */
 
-    app()->instance(ConfigRepositoryInterface::class, new class extends TestingConfigRepositroy
-    {
+    app()->instance(ConfigRepositoryInterface::class, new class extends TestingConfigRepositroy {
         public function getDiscoveryXMLConfigFile(): ?string
         {
             return file_get_contents(__DIR__.'/../Services/discovery-onlyoffice.xml');

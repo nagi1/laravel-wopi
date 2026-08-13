@@ -6,8 +6,7 @@ use Nagi\LaravelWopi\Tests\TestCase;
 
 function countingConfigRepository(int $ttl = 3600, ?string $rawXmlString = null): TestingConfigRepositroy
 {
-    return new class($ttl, $rawXmlString) extends TestingConfigRepositroy
-    {
+    return new class($ttl, $rawXmlString) extends TestingConfigRepositroy {
         public int $fetchCount = 0;
 
         public function __construct(private int $ttl, private ?string $rawXmlString)

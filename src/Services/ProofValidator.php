@@ -3,12 +3,12 @@
 namespace Nagi\LaravelWopi\Services;
 
 use Carbon\CarbonImmutable;
+use Log;
 use Nagi\LaravelWopi\Facades\Discovery;
 use Nagi\LaravelWopi\Support\DotNetTimeConverter;
 use Nagi\LaravelWopi\Support\ProofValidatorInput;
 use phpseclib\Crypt\RSA;
 use phpseclib\Math\BigInteger;
-use Log;
 
 /**
  * Proof if an inbound WOPI HTTP request is genuine or malicious.
@@ -30,6 +30,7 @@ class ProofValidator
         // Check if X-WOPI-PROOF header is present
         if (! $this->proofHeadersArePresent()) {
             Log::error('ProofValidator: Proof headers are not present!');
+
             return false;
         }
 
@@ -43,6 +44,7 @@ class ProofValidator
         // Making sure that timestamp header was sent within the last 20 minutes.
         if (! $this->verifyTimestamp()) {
             Log::error('ProofValidator: Timestamp is not valid!');
+
             return false;
         }
 
@@ -198,11 +200,13 @@ class ProofValidator
 
         if (! $rsa->loadKey($key)) {
             Log::error('ProofValidator: Unable to load key!');
+
             return false;
         }
 
         if (empty($expected)) {
             Log::error('ProofValidator: Expected key not set!');
+
             return false;
         }
 
@@ -213,6 +217,7 @@ class ProofValidator
         if (! $isValid) {
             Log::error('ProofValidator: Proof is not valid!');
         }
+
         return $isValid;
     }
 }
